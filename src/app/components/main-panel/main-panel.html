@@ -1,0 +1,37 @@
+<div #mainPanelContainer class="main-panel-container relative w-full h-screen overflow-hidden">
+  <!-- Slideshow Images with Parallax -->
+  <div class="absolute inset-0 w-full h-full">
+    @for (image of images; track $index) {
+    <div
+      class="parallax-bg slide-image absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat opacity-0 transition-opacity duration-[2000ms] ease-in-out will-change-transform"
+      [class.active]="currentSlide === $index"
+      [style.background-image]="'url(./' + image.url + ')'"
+      [attr.aria-hidden]="currentSlide !== $index"
+    ></div>
+    }
+  </div>
+
+  <!-- Overlay for better text readability with Parallax -->
+  <div
+    class="parallax-overlay absolute inset-0 w-full h-full bg-gradient-to-r from-black/40 via-black/20 to-black/10 z-[2] will-change-transform"
+  ></div>
+
+  <!-- Floating Text Content with Parallax -->
+  <div
+    class="relative h-full flex items-center justify-end px-[8%] z-[3] md:px-[5%] md:justify-center md:text-center"
+  >
+    <div class="parallax-text text-content max-w-[600px] text-white md:max-w-[90%] will-change-transform">
+      <h1
+        class="font-playfair text-7xl font-bold mb-6 leading-tight tracking-tight drop-shadow-[2px_2px_4px_rgba(0,0,0,0.5)] lg:text-6xl md:text-5xl md:mb-4 sm:text-4xl animate-fade-in-right"
+      >
+        Entdecken Sie Mexiko
+      </h1>
+      <p
+        class="font-lora text-xl leading-relaxed font-light opacity-95 tracking-wide drop-shadow-[2px_2px_4px_rgba(0,0,0,0.5)] md:text-lg md:leading-normal sm:text-base"
+      >
+        Ein Land voller Farben, Kultur und unvergesslicher Momente – wo jeder
+        Traum zur Wirklichkeit wird
+      </p>
+    </div>
+  </div>
+</div>

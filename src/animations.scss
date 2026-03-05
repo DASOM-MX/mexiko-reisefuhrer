@@ -1,0 +1,31 @@
+// Custom animations for the Mexico travel guide
+
+// Label change animation - gentle fade for readability
+@keyframes label-change {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+// Subtle pulse animation
+@keyframes pulse-subtle {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+// Utility classes
+.animate-label-change {
+  animation: label-change 1.25s ease-out;
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s ease-in-out infinite;
+}
+
