@@ -1,0 +1,9 @@
+---
+import DestinationView from "../../../components/DestinationView.astro";
+import { loadDestination } from "../../../lib/content";
+
+const data = await loadDestination(Astro, "es");
+if (!data) return Astro.rewrite("/404");
+---
+
+<DestinationView locale="es" {...data} />

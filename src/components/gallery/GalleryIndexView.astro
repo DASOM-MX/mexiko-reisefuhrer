@@ -1,0 +1,71 @@
+---
+/** Gallery index: an intro and the album carousel, in the 3a style. */
+import Base from "../../layouts/Base.astro";
+import { t, type Locale } from "../../i18n/ui";
+import type { GalleryIndexData } from "../../lib/content";
+import AlbumCarousel from "./AlbumCarousel.tsx";
+
+interface Props extends GalleryIndexData {
+	locale: Locale;
+}
+
+const { locale, home, albums, seo, alternates } = Astro.props;
+const ui = t(locale);
+// Loosely typed until `emdash types` has seen the new home fields.
+const d = home.data as { gallery_page_title?: string; gallery_page_text?: string };
+const edit = home.edit as Record<string, Record<string, unknown>>;
+---
+
+<Base
+	title={d.gallery_page_title || seo.title}
+	description={d.gallery_page_text}
+	canonical={seo.canonical}
+	robots={seo.robots}
+	locale={locale}
+	alternates={alternates}
+>
+	<section class="gal">
+		<header class="gal__header">
+			<h1 {...edit.gallery_page_title}>{d.gallery_page_title}</h1>
+			{d.gallery_page_text && <p class="gal__intro" {...edit.gallery_page_text}>{d.gallery_page_text}</p>}
+		</header>
+		{
+			albums.length > 0 ? (
+				<AlbumCarousel
+					client:visible
+					albums={albums}
+					labels={{ region: ui.galleryAlbums, prev: ui.prevAlbum, next: ui.nextAlbum }}
+				/>
+			) : (
+				<p class="gal__empty">{ui.galleryEmpty}</p>
+			)
+		}
+	</section>
+</Base>
+
+<style>
+	.gal {
+		max-width: var(--mx-max);
+		margin-inline: auto;
+		padding: clamp(48px, 6vw, 88px) var(--mx-gutter) clamp(64px, 8vw, 96px);
+	}
+	.gal__header {
+		max-width: 760px;
+		margin-bottom: clamp(32px, 4vw, 56px);
+	}
+	.gal h1 {
+		font-size: clamp(40px, 3.6vw + 22px, 68px);
+		line-height: 1.02;
+		font-weight: 500;
+		letter-spacing: -0.035em;
+	}
+	.gal__intro {
+		margin-top: 24px;
+		font-size: 18px;
+		line-height: 1.6;
+		color: var(--mx-text-2);
+	}
+	.gal__empty {
+		color: var(--mx-muted);
+	}
+</style>

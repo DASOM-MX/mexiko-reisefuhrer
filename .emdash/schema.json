@@ -1,0 +1,551 @@
+{
+  "collections": [
+    {
+      "slug": "destinations",
+      "label": "Sehenswürdigkeiten",
+      "labelSingular": "Sehenswürdigkeit",
+      "supports": [
+        "drafts",
+        "revisions",
+        "preview",
+        "search",
+        "seo"
+      ],
+      "hidden": false,
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Titel",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "region",
+          "label": "Region",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "summary",
+          "label": "Kurzbeschreibung",
+          "type": "text",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "featured_image",
+          "label": "Titelbild",
+          "type": "image",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "content",
+          "label": "Inhalt",
+          "type": "portableText",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "gallery",
+          "label": "Bildergalerie",
+          "type": "repeater",
+          "required": false,
+          "unique": false,
+          "validation": {
+            "subFields": [
+              {
+                "slug": "image",
+                "label": "Bild",
+                "type": "image",
+                "required": true
+              }
+            ]
+          }
+        },
+        {
+          "slug": "featured",
+          "label": "Auf der Startseite zeigen",
+          "type": "boolean",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "sort_order",
+          "label": "Reihenfolge",
+          "type": "integer",
+          "required": false,
+          "unique": false
+        }
+      ]
+    },
+    {
+      "slug": "galleries",
+      "label": "Galerien",
+      "labelSingular": "Galerie",
+      "supports": [
+        "drafts",
+        "revisions",
+        "preview",
+        "search",
+        "seo"
+      ],
+      "hidden": false,
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Titel",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "description",
+          "label": "Beschreibung",
+          "type": "text",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "cover",
+          "label": "Titelbild",
+          "type": "image",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "photos",
+          "label": "Fotos (die ersten 3 erscheinen beim Überfahren der Karte)",
+          "type": "repeater",
+          "required": false,
+          "unique": false,
+          "validation": {
+            "subFields": [
+              {
+                "slug": "image",
+                "label": "Bild",
+                "type": "image",
+                "required": true
+              },
+              {
+                "slug": "caption",
+                "label": "Bildunterschrift",
+                "type": "string"
+              }
+            ]
+          }
+        },
+        {
+          "slug": "sort_order",
+          "label": "Reihenfolge",
+          "type": "integer",
+          "required": false,
+          "unique": false
+        }
+      ]
+    },
+    {
+      "slug": "home",
+      "label": "Startseite",
+      "labelSingular": "Startseite",
+      "supports": [
+        "drafts",
+        "revisions",
+        "preview"
+      ],
+      "hidden": false,
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Interner Titel",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "hero_title",
+          "label": "Hero: Überschrift",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "hero_text",
+          "label": "Hero: Einleitung",
+          "type": "text",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "hero_cta_primary",
+          "label": "Hero: Button (Kontakt)",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "hero_cta_secondary",
+          "label": "Hero: Link (Angebote)",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "hero_images",
+          "label": "Hero: Bilder (3)",
+          "type": "repeater",
+          "required": false,
+          "unique": false,
+          "validation": {
+            "subFields": [
+              {
+                "slug": "image",
+                "label": "Bild",
+                "type": "image",
+                "required": true
+              }
+            ]
+          }
+        },
+        {
+          "slug": "credentials",
+          "label": "Qualifikationen",
+          "type": "repeater",
+          "required": false,
+          "unique": false,
+          "validation": {
+            "subFields": [
+              {
+                "slug": "title",
+                "label": "Titel",
+                "type": "string",
+                "required": true
+              },
+              {
+                "slug": "text",
+                "label": "Text",
+                "type": "string"
+              }
+            ]
+          }
+        },
+        {
+          "slug": "offer_title",
+          "label": "Angebot: Überschrift",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "offer_text",
+          "label": "Angebot: Text",
+          "type": "text",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "steps",
+          "label": "Angebot: Schritte",
+          "type": "repeater",
+          "required": false,
+          "unique": false,
+          "validation": {
+            "subFields": [
+              {
+                "slug": "title",
+                "label": "Titel",
+                "type": "string",
+                "required": true
+              },
+              {
+                "slug": "text",
+                "label": "Text",
+                "type": "text"
+              }
+            ]
+          }
+        },
+        {
+          "slug": "highlights_title",
+          "label": "Sehenswürdigkeiten: Überschrift",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "highlights_link_label",
+          "label": "Sehenswürdigkeiten: Linktext",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "highlights_link_url",
+          "label": "Sehenswürdigkeiten: Link-URL (leer = ausgeblendet)",
+          "type": "url",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "about_eyebrow",
+          "label": "Über mich: Kleine Überschrift",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "about_quote",
+          "label": "Über mich: Zitat",
+          "type": "text",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "about_text",
+          "label": "Über mich: Text",
+          "type": "portableText",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "about_image",
+          "label": "Über mich: Foto",
+          "type": "image",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "about_link_label",
+          "label": "Über mich: Linktext",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "about_link_url",
+          "label": "Über mich: Link-URL",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "gallery_title",
+          "label": "Galerie: Überschrift",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "gallery_link_label",
+          "label": "Galerie: Linktext",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "gallery_page_title",
+          "label": "Galerie-Seite: Überschrift",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "gallery_page_text",
+          "label": "Galerie-Seite: Einleitung",
+          "type": "text",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "gallery",
+          "label": "Galerie: Bilder (7)",
+          "type": "repeater",
+          "required": false,
+          "unique": false,
+          "validation": {
+            "subFields": [
+              {
+                "slug": "image",
+                "label": "Bild",
+                "type": "image",
+                "required": true
+              }
+            ]
+          }
+        },
+        {
+          "slug": "contact_title",
+          "label": "Kontakt: Überschrift",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "contact_text",
+          "label": "Kontakt: Text",
+          "type": "text",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "contact_note",
+          "label": "Kontakt: Hinweis",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "contact_form",
+          "label": "Kontakt: Formular-ID (aus Plugins → Forms)",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "contact_privacy",
+          "label": "Kontakt: Datenschutzhinweis",
+          "type": "string",
+          "required": false,
+          "unique": false
+        }
+      ]
+    },
+    {
+      "slug": "pages",
+      "label": "Seiten",
+      "labelSingular": "Seite",
+      "supports": [
+        "drafts",
+        "revisions",
+        "preview",
+        "search",
+        "seo"
+      ],
+      "hidden": false,
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Titel",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "content",
+          "label": "Inhalt",
+          "type": "portableText",
+          "required": false,
+          "unique": false
+        }
+      ]
+    },
+    {
+      "slug": "posts",
+      "label": "Blog",
+      "labelSingular": "Blogbeitrag",
+      "supports": [
+        "drafts",
+        "revisions",
+        "preview",
+        "scheduling",
+        "search",
+        "seo"
+      ],
+      "hidden": false,
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Titel",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "featured_image",
+          "label": "Titelbild",
+          "type": "image",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "content",
+          "label": "Inhalt",
+          "type": "portableText",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "excerpt",
+          "label": "Kurzfassung",
+          "type": "text",
+          "required": false,
+          "unique": false
+        }
+      ]
+    },
+    {
+      "slug": "testimonials",
+      "label": "Erfahrungsberichte",
+      "labelSingular": "Erfahrungsbericht",
+      "supports": [
+        "drafts",
+        "revisions"
+      ],
+      "hidden": false,
+      "fields": [
+        {
+          "slug": "name",
+          "label": "Name",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "origin",
+          "label": "Herkunft (z. B. Hamburg)",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "trip",
+          "label": "Reise",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "quote",
+          "label": "Bericht",
+          "type": "text",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "photo",
+          "label": "Foto",
+          "type": "image",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "rating",
+          "label": "Bewertung (1–5)",
+          "type": "integer",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "featured",
+          "label": "Auf der Startseite zeigen",
+          "type": "boolean",
+          "required": false,
+          "unique": false
+        }
+      ]
+    }
+  ],
+  "version": "804734beccb871d5"
+}

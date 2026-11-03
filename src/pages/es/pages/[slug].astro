@@ -1,0 +1,9 @@
+---
+import PageView from "../../../components/PageView.astro";
+import { loadPage } from "../../../lib/content";
+
+const data = await loadPage(Astro, "es");
+if (!data) return Astro.rewrite("/404");
+---
+
+<PageView locale="es" {...data} />

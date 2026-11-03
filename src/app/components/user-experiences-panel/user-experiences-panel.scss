@@ -1,9 +1,0 @@
-// Testimonial slide transitions
-.testimonial-slide {
-  will-change: opacity;
-  min-height: 280px;
-  
-  @media (max-width: 1024px) {
-    min-height: 320px;
-  }
-}

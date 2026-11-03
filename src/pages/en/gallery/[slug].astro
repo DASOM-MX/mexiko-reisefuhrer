@@ -1,0 +1,9 @@
+---
+import GalleryView from "../../../components/gallery/GalleryView.astro";
+import { loadGallery } from "../../../lib/content";
+
+const data = await loadGallery(Astro, "en");
+if (!data) return Astro.rewrite("/404");
+---
+
+<GalleryView locale="en" {...data} />

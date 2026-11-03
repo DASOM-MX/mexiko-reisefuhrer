@@ -1,0 +1,75 @@
+/*
+  theme.css: the "3a / Warm editorial" design (Claude Design project
+  "Facelift Home", option 3a).
+
+  Overrides the template tokens in tokens.css (unlayered, so these win)
+  and adds the brand tokens used by the homepage and site chrome.
+  The design is light-only, so the color scheme is pinned to light.
+*/
+
+:root {
+	color-scheme: light;
+
+	/* 3a palette */
+	--mx-canvas: #f6f2ec;
+	--mx-sand: #ede5da;
+	--mx-line: #e4dbcf;
+	--mx-surface: #ffffff;
+	--mx-ink: #2a221c;
+	--mx-ink-2: #4a3e35;
+	--mx-text-2: #6a5b4f;
+	--mx-muted: #857464;
+	--mx-muted-2: #8a7868;
+	--mx-accent: oklch(0.55 0.07 45); /* muted terracotta: small details only */
+	--mx-dark: #2a221c;
+	--mx-dark-2: #3a3029;
+	--mx-on-dark: #f6f2ec;
+	--mx-on-dark-2: #c8bcaf;
+	--mx-on-dark-3: #9a8c7f;
+	--mx-on-dark-4: #a89a8d;
+	--mx-placeholder: repeating-linear-gradient(135deg, #e6dccf 0 8px, #ede5da 8px 16px);
+
+	--mx-gutter: clamp(1rem, 5vw, 4rem); /* 64px at desktop, 16px at phone width */
+	--mx-max: 1280px;
+	--mx-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+	/* Template tokens, mapped onto the palette (blog, pages, search) */
+	--color-bg: var(--mx-canvas);
+	--color-surface: var(--mx-surface);
+	--color-fill: var(--mx-sand);
+	--color-fill-strong: var(--mx-line);
+	--color-text: var(--mx-ink);
+	--color-text-secondary: var(--mx-text-2);
+	--color-muted: var(--mx-muted);
+	--color-border: var(--mx-line);
+	--color-border-subtle: #ece4d9;
+	--color-border-strong: #d6cabb;
+	--color-brand: var(--mx-ink);
+	--color-brand-hover: var(--mx-ink-2);
+	--color-on-brand: var(--mx-on-dark);
+	--color-ring: rgb(42 34 28 / 0.08);
+	--color-shadow: rgb(42 34 28 / 0.06);
+	--color-shadow-strong: rgb(42 34 28 / 0.12);
+
+	--font-weight-heading: 500;
+	--font-weight-display: 500;
+	--tracking-tight: -0.035em;
+	--tracking-snug: -0.02em;
+
+	--radius-sm: 6px;
+	--radius: 8px;
+	--radius-lg: 10px;
+	--radius-xl: 14px;
+	--wide-width: var(--mx-max);
+}
+
+/* The template's frame rails and crosshairs are not part of this design. */
+body::before,
+.band::before,
+.band::after {
+	display: none !important;
+}
+
+::selection {
+	background: color-mix(in oklch, var(--mx-accent) 30%, transparent);
+}

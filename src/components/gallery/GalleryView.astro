@@ -1,0 +1,403 @@
+---
+/** A "galleries" album: photo mosaic plus a lightbox, in the 3a style. */
+import { Image } from "emdash/ui";
+import Base from "../../layouts/Base.astro";
+import { galleryPath, t, type Locale } from "../../i18n/ui";
+import { islandImage, type GalleryData, type GalleryFields } from "../../lib/content";
+
+interface Props extends GalleryData {
+	locale: Locale;
+}
+
+const { locale, entry, slug, seo, alternates, isFallback } = Astro.props;
+const ui = t(locale);
+const d = entry.data as GalleryFields;
+type Photo = NonNullable<GalleryFields["photos"]>[number];
+const photos = (d.photos ?? []).filter((p) => p.image);
+const full = await Promise.all(photos.map((p) => islandImage(Astro, p.image, d.title, 2000)));
+const label = (p: Photo, i: number) => p.caption || p.image?.alt || `${d.title} ${i + 1}`;
+---
+
+<Base
+	title={seo.title}
+	pageTitle={seo.ogTitle}
+	description={seo.description ?? d.description}
+	image={seo.ogImage}
+	canonical={seo.canonical}
+	robots={seo.robots}
+	locale={locale}
+	alternates={alternates}
+	content={{ collection: "galleries", id: d.id, slug }}
+>
+	<article class="alb">
+		<p class="alb__back">
+			<a class="mx-link" href={galleryPath(locale)}>← {ui.backToGallery}</a>
+		</p>
+		<header class="alb__header">
+			<p class="alb__count">{ui.photoCount(photos.length)}</p>
+			<h1 {...entry.edit.title}>{d.title}</h1>
+			{d.description && <p class="alb__summary" {...entry.edit.description}>{d.description}</p>}
+			{isFallback && <p class="alb__fallback">{ui.translationFallback}</p>}
+		</header>
+
+		<div class="alb__grid" {...entry.edit.photos}>
+			{
+				photos.map((p, i) => (
+					<button type="button" class="alb__tile" data-index={i} aria-label={label(p, i)}>
+						<Image
+							image={p.image as never}
+							alt=""
+							priority={i < 3}
+							sizes="(max-width: 800px) 50vw, 400px"
+						/>
+					</button>
+				))
+			}
+		</div>
+	</article>
+
+	<dialog class="lb" id="lightbox" aria-label={d.title}>
+		<div class="lb__stage">
+			<img class="lb__img" alt="" />
+		</div>
+		<p class="lb__caption" aria-live="polite"></p>
+		<p class="lb__count"></p>
+		<button type="button" class="lb__btn lb__close" data-act="close" aria-label={ui.lightboxClose}>
+			<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+		</button>
+		<button type="button" class="lb__btn lb__prev" data-act="prev" aria-label={ui.lightboxPrev}>
+			<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+		</button>
+		<button type="button" class="lb__btn lb__next" data-act="next" aria-label={ui.lightboxNext}>
+			<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+		</button>
+	</dialog>
+
+	<script
+		id="lightbox-data"
+		type="application/json"
+		set:html={JSON.stringify(
+			photos.map((p, i) => ({
+				src: full[i]?.src ?? "",
+				alt: p.image?.alt ?? "",
+				caption: p.caption ?? "",
+				label: label(p, i),
+			})),
+		).replace(/</g, "\\u003c")}
+	/>
+</Base>
+
+<style>
+	.alb {
+		max-width: var(--mx-max);
+		margin-inline: auto;
+		padding: clamp(32px, 4vw, 56px) var(--mx-gutter) clamp(64px, 8vw, 96px);
+	}
+	.alb__back {
+		margin-bottom: clamp(24px, 3vw, 40px);
+		font-size: 15px;
+	}
+	.alb__header {
+		max-width: 760px;
+	}
+	.alb__count {
+		margin-bottom: 14px;
+		font-size: 13px;
+		font-weight: 500;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--mx-accent);
+	}
+	.alb h1 {
+		font-size: clamp(40px, 3.6vw + 22px, 68px);
+		line-height: 1.02;
+		font-weight: 500;
+		letter-spacing: -0.035em;
+	}
+	.alb__summary {
+		margin-top: 24px;
+		font-size: 18px;
+		line-height: 1.6;
+		color: var(--mx-text-2);
+	}
+	.alb__fallback {
+		margin-top: 12px;
+		font-size: 14px;
+		color: var(--mx-muted);
+	}
+	.alb__grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-auto-flow: dense;
+		grid-auto-rows: clamp(160px, 22vw, 280px);
+		gap: 10px;
+		margin-top: clamp(32px, 4vw, 56px);
+	}
+	.alb__tile {
+		all: unset;
+		box-sizing: border-box;
+		position: relative;
+		overflow: hidden;
+		border-radius: 10px;
+		background: var(--mx-placeholder);
+		cursor: zoom-in;
+	}
+	.alb__tile:nth-child(5n + 1) {
+		grid-column: span 2;
+		grid-row: span 2;
+	}
+	.alb__tile:focus-visible {
+		outline: 2px solid var(--mx-ink);
+		outline-offset: 3px;
+	}
+	.alb__tile :global(img) {
+		display: block;
+		width: 100%;
+		height: 100%;
+		max-width: none;
+		object-fit: cover;
+		transition: transform 0.5s var(--mx-ease);
+	}
+	@media (hover: hover) {
+		.alb__tile:hover :global(img) {
+			transform: scale(1.03);
+		}
+	}
+	@media (max-width: 800px) {
+		.alb__grid {
+			grid-template-columns: repeat(2, 1fr);
+			grid-auto-rows: 38vw;
+			gap: 8px;
+		}
+		.alb__tile {
+			border-radius: 8px;
+		}
+	}
+
+	/* Lightbox */
+	.lb {
+		position: fixed;
+		inset: 0;
+		width: 100%;
+		max-width: none;
+		height: 100%;
+		max-height: none;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		background: rgb(20 16 13 / 0.94);
+		color: var(--mx-on-dark);
+		overflow: hidden;
+	}
+	.lb:not([open]) {
+		display: none;
+	}
+	.lb[open] {
+		display: grid;
+		grid-template-rows: 1fr auto auto;
+		justify-items: center;
+		padding: clamp(56px, 6vw, 72px) clamp(12px, 5vw, 88px) 20px;
+		animation: lb-in 0.2s var(--mx-ease);
+	}
+	.lb::backdrop {
+		background: transparent;
+	}
+	.lb__stage {
+		display: grid;
+		place-items: center;
+		width: 100%;
+		min-height: 0;
+		touch-action: pan-y;
+	}
+	.lb__img {
+		max-width: 100%;
+		max-height: 90vh;
+		max-height: min(90vh, 100%);
+		object-fit: contain;
+		border-radius: 4px;
+		user-select: none;
+		-webkit-user-drag: none;
+	}
+	.lb__caption {
+		margin-top: 14px;
+		min-height: 1.5em;
+		max-width: 70ch;
+		text-align: center;
+		font-size: 15px;
+		line-height: 1.5;
+		color: var(--mx-on-dark);
+	}
+	.lb__count {
+		margin-top: 4px;
+		font-size: 13px;
+		letter-spacing: 0.06em;
+		color: var(--mx-on-dark-3);
+		font-variant-numeric: tabular-nums;
+	}
+	.lb__btn {
+		position: absolute;
+		display: grid;
+		place-items: center;
+		width: 44px;
+		height: 44px;
+		padding: 0;
+		border: 1px solid rgb(246 242 236 / 0.25);
+		border-radius: 50%;
+		background: rgb(20 16 13 / 0.5);
+		color: var(--mx-on-dark);
+		cursor: pointer;
+		transition: background 0.2s;
+	}
+	.lb__btn:hover {
+		background: rgb(246 242 236 / 0.16);
+	}
+	.lb__btn:focus-visible {
+		outline: 2px solid var(--mx-on-dark);
+		outline-offset: 2px;
+	}
+	.lb__btn svg {
+		width: 22px;
+		height: 22px;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 1.8;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+	.lb__close {
+		top: 14px;
+		right: 14px;
+	}
+	.lb__prev,
+	.lb__next {
+		top: 50%;
+		translate: 0 -50%;
+	}
+	.lb__prev {
+		left: 14px;
+	}
+	.lb__next {
+		right: 14px;
+	}
+	@media (max-width: 640px) {
+		.lb__prev,
+		.lb__next {
+			top: auto;
+			bottom: 14px;
+			translate: none;
+		}
+		.lb__prev {
+			left: 14px;
+		}
+		.lb__next {
+			right: 14px;
+		}
+		.lb[open] {
+			padding-bottom: 72px;
+		}
+	}
+	@keyframes lb-in {
+		from {
+			opacity: 0;
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.lb[open] {
+			animation: none;
+		}
+		.alb__tile :global(img) {
+			transition: none;
+		}
+	}
+</style>
+
+<style is:global>
+	html:has(dialog.lb[open]) {
+		overflow: hidden;
+	}
+</style>
+
+<script>
+	type Item = { src: string; alt: string; caption: string; label: string };
+
+	const dialog = document.getElementById("lightbox") as HTMLDialogElement | null;
+	const dataEl = document.getElementById("lightbox-data");
+	if (dialog && dataEl) {
+		const items: Item[] = JSON.parse(dataEl.textContent || "[]");
+		const tiles = Array.from(document.querySelectorAll<HTMLButtonElement>(".alb__tile"));
+		const img = dialog.querySelector<HTMLImageElement>(".lb__img")!;
+		const caption = dialog.querySelector<HTMLElement>(".lb__caption")!;
+		const count = dialog.querySelector<HTMLElement>(".lb__count")!;
+		const stage = dialog.querySelector<HTMLElement>(".lb__stage")!;
+		let index = 0;
+		let opener: HTMLElement | null = null;
+
+		const show = (i: number) => {
+			if (!items.length) return;
+			index = (i + items.length) % items.length;
+			const item = items[index];
+			img.src = item.src;
+			img.alt = item.alt || item.label;
+			caption.textContent = item.caption;
+			caption.hidden = !item.caption;
+			count.textContent = `${index + 1} / ${items.length}`;
+			// Warm the neighbours so paging feels instant.
+			for (const j of [index + 1, index - 1]) {
+				const n = items[(j + items.length) % items.length];
+				if (n) new Image().src = n.src;
+			}
+		};
+
+		const open = (i: number, from: HTMLElement) => {
+			opener = from;
+			show(i);
+			dialog.showModal();
+		};
+
+		tiles.forEach((tile, i) => tile.addEventListener("click", () => open(i, tile)));
+
+		dialog.addEventListener("click", (e) => {
+			const target = e.target as HTMLElement;
+			const act = target.closest<HTMLElement>("[data-act]")?.dataset.act;
+			if (act === "close") dialog.close();
+			else if (act === "prev") show(index - 1);
+			else if (act === "next") show(index + 1);
+			else if (target === dialog || target === stage) dialog.close(); // backdrop
+		});
+
+		dialog.addEventListener("keydown", (e) => {
+			if (e.key === "ArrowLeft") {
+				e.preventDefault();
+				show(index - 1);
+			} else if (e.key === "ArrowRight") {
+				e.preventDefault();
+				show(index + 1);
+			}
+		});
+
+		dialog.addEventListener("close", () => {
+			img.removeAttribute("src");
+			const target = tiles[index] ?? opener;
+			(target ?? opener)?.focus();
+		});
+
+		// Swipe left/right on touch.
+		let startX = 0;
+		let startY = 0;
+		let tracking = false;
+		stage.addEventListener("pointerdown", (e) => {
+			if (e.pointerType === "mouse") return;
+			tracking = true;
+			startX = e.clientX;
+			startY = e.clientY;
+		});
+		stage.addEventListener("pointerup", (e) => {
+			if (!tracking) return;
+			tracking = false;
+			const dx = e.clientX - startX;
+			const dy = e.clientY - startY;
+			if (Math.abs(dx) >= 40 && Math.abs(dx) > Math.abs(dy)) show(index + (dx < 0 ? 1 : -1));
+		});
+		stage.addEventListener("pointercancel", () => (tracking = false));
+	}
+</script>
