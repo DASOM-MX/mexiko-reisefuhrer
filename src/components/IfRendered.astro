@@ -1,0 +1,10 @@
+---
+/**
+ * Renders the default slot, or the "fallback" slot when the default slot
+ * renders to nothing. Used for the forms plugin's <Form>, which renders
+ * nothing when the form ID doesn't exist yet.
+ */
+const html = Astro.slots.has("default") ? await Astro.slots.render("default") : "";
+---
+
+{html.trim() ? <Fragment set:html={html} /> : <slot name="fallback" />}

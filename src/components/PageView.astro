@@ -1,0 +1,73 @@
+---
+/** A "pages" entry (Über mich, Impressum, Datenschutz…) in the 3a style. */
+import { PortableText } from "emdash/ui";
+import Base from "../layouts/Base.astro";
+import { t, type Locale } from "../i18n/ui";
+import type { PageData } from "../lib/content";
+import "../styles/prose.css";
+
+interface Props extends PageData {
+	locale: Locale;
+}
+
+const { locale, page, slug, seo, alternates, isFallback } = Astro.props;
+---
+
+<Base
+	title={seo.title}
+	pageTitle={seo.ogTitle}
+	description={seo.description}
+	canonical={seo.canonical}
+	robots={seo.robots}
+	locale={locale}
+	alternates={alternates}
+	content={{ collection: "pages", id: page.data.id, slug }}
+>
+	<article class="page">
+		<header class="page__header">
+			<h1 class="page__title" {...page.edit.title}>{page.data.title}</h1>
+			{isFallback && <p class="page__fallback">{t(locale).translationFallback}</p>}
+		</header>
+		<div class="prose page__body" {...page.edit.content}>
+			<PortableText value={page.data.content} />
+		</div>
+	</article>
+</Base>
+
+<style>
+	.page {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		gap: 32px;
+		max-width: var(--mx-max);
+		margin-inline: auto;
+		padding: clamp(48px, 6vw, 96px) var(--mx-gutter) clamp(64px, 8vw, 112px);
+	}
+	.page__title {
+		max-width: 18ch;
+		font-size: clamp(40px, 3.2vw + 18px, 60px);
+		line-height: 1.03;
+		font-weight: 500;
+		letter-spacing: -0.035em;
+	}
+	.page__fallback {
+		margin-top: 16px;
+		font-size: 14px;
+		color: var(--mx-muted);
+	}
+	.page__body {
+		font-size: 17px;
+		color: var(--mx-text-2);
+	}
+	@media (min-width: 960px) {
+		.page {
+			grid-template-columns: minmax(14rem, 1fr) minmax(0, var(--content-width));
+			column-gap: clamp(2rem, 1rem + 4vw, 6rem);
+		}
+		.page__header {
+			position: sticky;
+			top: 32px;
+			align-self: start;
+		}
+	}
+</style>

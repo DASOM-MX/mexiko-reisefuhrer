@@ -1,0 +1,441 @@
+---
+/**
+ * Site layout: "3a / Warm editorial".
+ *
+ * Keeps the EmDash wiring from the template (SEO head, plugin page
+ * contributions, visual editing hooks) and renders the 3a header and
+ * footer. Every page in the site uses it, so the blog and the homepage
+ * share one header, footer and palette.
+ */
+import { getMenuWithCacheHint, getSiteSettingsWithCacheHint } from "emdash";
+import { EmDashHead, EmDashBodyStart, EmDashBodyEnd } from "emdash/ui";
+import { createPublicPageContext } from "emdash/page";
+import { Font } from "astro:assets";
+import { resolveBlogSiteIdentity } from "../utils/site-identity";
+import { LOCALES, asLocale, localePath, t, type Locale } from "../i18n/ui";
+import "../styles/tokens.css";
+import "../styles/base.css";
+import "../styles/theme.css";
+
+interface Props {
+	title: string;
+	pageTitle?: string | null;
+	description?: string | null;
+	image?: string | null;
+	canonical?: string | null;
+	robots?: string | null;
+	type?: "website" | "article";
+	publishedTime?: string | null;
+	modifiedTime?: string | null;
+	author?: string | null;
+	/** Pass content reference for plugin page contributions on content pages */
+	content?: { collection: string; id: string; slug?: string | null };
+	/** Page locale; defaults to the locale Astro's router resolved. */
+	locale?: Locale;
+	/** URL of this page in each other locale, for the language switcher and hreflang. */
+	alternates?: Partial<Record<Locale, string>>;
+}
+
+const {
+	title,
+	pageTitle,
+	description,
+	image,
+	canonical,
+	robots,
+	type = "website",
+	publishedTime,
+	modifiedTime,
+	author,
+	content,
+	alternates = {},
+} = Astro.props;
+
+const locale = Astro.props.locale ?? asLocale(Astro.currentLocale);
+const ui = t(locale);
+
+const [settingsResult, menuResult] = await Promise.all([
+	getSiteSettingsWithCacheHint(),
+	getMenuWithCacheHint("primary", { locale }),
+]);
+if (Astro.cache?.enabled) {
+	Astro.cache.set(settingsResult.cacheHint);
+	Astro.cache.set(menuResult.cacheHint);
+}
+
+const { siteTitle, siteLogo } = resolveBlogSiteIdentity(settingsResult.data);
+const titleIncludesSiteName =
+	title === siteTitle || title.endsWith(` | ${siteTitle}`) || title.endsWith(` — ${siteTitle}`);
+const fullTitle = titleIncludesSiteName ? title : `${title} — ${siteTitle}`;
+const menuItems = menuResult.data?.items ?? [];
+
+// "Mexiko Reiseführer" → "Mexiko" + muted "Reiseführer", as in the design.
+const [brandFirst, ...brandRest] = siteTitle.trim().split(/\s+/);
+
+const pageCtx = createPublicPageContext({
+	Astro,
+	kind: content ? "content" : "custom",
+	pageType: type,
+	title: fullTitle,
+	pageTitle: pageTitle ?? title,
+	description,
+	canonical,
+	image,
+	content,
+	seo: { ogImage: image, robots },
+	articleMeta: { publishedTime, modifiedTime, author },
+	siteName: siteTitle,
+});
+
+const languageLinks = LOCALES.map((l) => ({
+	locale: l,
+	href: alternates[l] ?? localePath(l, "/"),
+	label: l.toUpperCase(),
+	name: t(l).languageName,
+}));
+const hreflangLinks = LOCALES.filter((l) => alternates[l]).map((l) => ({
+	locale: l,
+	href: new URL(alternates[l]!, Astro.url).href,
+}));
+
+const TRAILING_SLASH = /\/$/;
+const currentPath = Astro.url.pathname.replace(TRAILING_SLASH, "") || "/";
+function navCurrent(url: string): "page" | undefined {
+	try {
+		const target = new URL(url, Astro.url);
+		if (target.hash || target.origin !== Astro.url.origin) return undefined;
+		return (target.pathname.replace(TRAILING_SLASH, "") || "/") === currentPath ? "page" : undefined;
+	} catch {
+		return undefined;
+	}
+}
+
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang={locale}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<Font cssVariable="--font-body" preload />
+		<Font cssVariable="--font-mono" />
+		<title>{fullTitle}</title>
+		<EmDashHead page={pageCtx} />
+		{!settingsResult.data?.favicon?.url && <link rel="icon" href="/favicon.svg" type="image/svg+xml" />}
+		{hreflangLinks.map((l) => <link rel="alternate" hreflang={l.locale} href={l.href} />)}
+		{
+			alternates.de && (
+				<link rel="alternate" hreflang="x-default" href={new URL(alternates.de, Astro.url).href} />
+			)
+		}
+		<link rel="alternate" type="application/rss+xml" title={`${siteTitle} RSS`} href="/rss.xml" />
+	</head>
+	<body>
+		<EmDashBodyStart page={pageCtx} />
+		<a href="#main" class="skip-link">{ui.skipToContent}</a>
+
+		<header class="mx-header">
+			<div class="mx-header__inner">
+				<a href={localePath(locale, "/")} class="mx-brand">
+					{
+						siteLogo ? (
+							<img src={siteLogo.url} alt={siteLogo.alt || siteTitle} class="mx-brand__logo" />
+						) : (
+							<>
+								{brandFirst}
+								{brandRest.length > 0 && <span> {brandRest.join(" ")}</span>}
+							</>
+						)
+					}
+				</a>
+
+				<nav class="mx-nav" aria-label={ui.mainNav}>
+					<ul>
+						{
+							menuItems.map((item) => (
+								<li>
+									<a
+										href={item.url}
+										target={item.target}
+										rel={item.target === "_blank" ? "noopener noreferrer" : undefined}
+										aria-current={navCurrent(item.url)}
+									>
+										{item.label}
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</nav>
+
+				<div class="mx-header__actions">
+					<ul class="mx-lang" aria-label={ui.language}>
+						{
+							languageLinks.map((l) => (
+								<li>
+									<a
+										href={l.href}
+										hreflang={l.locale}
+										lang={l.locale}
+										title={l.name}
+										aria-current={l.locale === locale ? "true" : undefined}
+									>
+										{l.label}
+									</a>
+								</li>
+							))
+						}
+					</ul>
+					<a href={localePath(locale, "/#kontakt")} class="mx-pill mx-pill--sm">{ui.contact}</a>
+
+					<details class="mx-menu">
+						<summary aria-label={ui.openMenu}>
+							<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+						</summary>
+						<div class="mx-menu__panel">
+							<ul>
+								{
+									menuItems.map((item) => (
+										<li>
+											<a href={item.url} target={item.target}>
+												{item.label}
+											</a>
+										</li>
+									))
+								}
+								<li><a href={localePath(locale, "/#kontakt")}>{ui.contact}</a></li>
+							</ul>
+						</div>
+					</details>
+				</div>
+			</div>
+		</header>
+
+		<main id="main" tabindex="-1">
+			<slot />
+		</main>
+
+		<footer class="mx-footer">
+			<span>© {year} {siteTitle}</span>
+			<div class="mx-footer__links">
+				<a href={localePath(locale, "/pages/impressum")}>{ui.imprint}</a>
+				<a href={localePath(locale, "/pages/datenschutz")}>{ui.privacy}</a>
+			</div>
+		</footer>
+
+		<script>
+			// Close the mobile menu after following an in-page link.
+			document.querySelectorAll<HTMLDetailsElement>(".mx-menu").forEach((menu) => {
+				menu.addEventListener("click", (e) => {
+					if ((e.target as Element).closest("a")) menu.open = false;
+				});
+			});
+		</script>
+		<EmDashBodyEnd page={pageCtx} />
+	</body>
+</html>
+
+<style is:global>
+	main {
+		flex: 1;
+	}
+	main:focus {
+		outline: none;
+	}
+	html {
+		scroll-padding-top: 16px;
+	}
+
+	.mx-pill {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5em;
+		padding: 16px 26px;
+		border: 0;
+		border-radius: 999px;
+		background: var(--mx-ink);
+		color: var(--mx-on-dark);
+		font: inherit;
+		font-weight: 500;
+		line-height: 1.2;
+		text-decoration: none;
+		cursor: pointer;
+		transition: background-color 150ms ease;
+	}
+	.mx-pill:hover {
+		background: var(--mx-ink-2);
+	}
+	.mx-pill:focus-visible,
+	.mx-link:focus-visible {
+		outline: 2px solid var(--mx-accent);
+		outline-offset: 3px;
+	}
+	.mx-pill--sm {
+		padding: 11px 20px;
+		font-size: 14px;
+	}
+	.mx-link {
+		font-weight: 500;
+		color: var(--mx-ink);
+		text-decoration: none;
+		white-space: nowrap;
+	}
+	.mx-link:hover {
+		opacity: 0.7;
+	}
+</style>
+
+<style>
+	.mx-header {
+		border-bottom: 1px solid var(--mx-line);
+		background: var(--mx-canvas);
+	}
+	.mx-header__inner {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 24px;
+		max-width: var(--mx-max);
+		margin-inline: auto;
+		padding: 24px var(--mx-gutter);
+	}
+	.mx-brand {
+		flex: none;
+		font-size: 20px;
+		font-weight: 600;
+		letter-spacing: -0.01em;
+		color: var(--mx-ink);
+		text-decoration: none;
+	}
+	.mx-brand span {
+		font-weight: 400;
+		color: var(--mx-muted-2);
+	}
+	.mx-brand__logo {
+		display: block;
+		height: 36px;
+		width: auto;
+	}
+	.mx-nav ul {
+		display: flex;
+		gap: 34px;
+		list-style: none;
+	}
+	.mx-nav a {
+		font-size: 15px;
+		color: var(--mx-ink-2);
+		text-decoration: none;
+	}
+	.mx-nav a:hover,
+	.mx-nav a[aria-current="page"] {
+		color: var(--mx-ink);
+	}
+	.mx-header__actions {
+		display: flex;
+		align-items: center;
+		gap: 18px;
+	}
+	.mx-lang {
+		display: flex;
+		gap: 2px;
+		list-style: none;
+		font-size: 12px;
+		font-weight: 500;
+		letter-spacing: 0.04em;
+	}
+	.mx-lang a {
+		display: block;
+		padding: 4px 6px;
+		border-radius: 4px;
+		color: var(--mx-muted);
+		text-decoration: none;
+	}
+	.mx-lang a:hover {
+		color: var(--mx-ink);
+	}
+	.mx-lang a[aria-current="true"] {
+		color: var(--mx-ink);
+		background: var(--mx-sand);
+	}
+
+	.mx-menu {
+		display: none;
+	}
+	.mx-menu summary {
+		display: grid;
+		place-items: center;
+		width: 40px;
+		height: 40px;
+		border-radius: 999px;
+		color: var(--mx-ink);
+		cursor: pointer;
+		list-style: none;
+	}
+	.mx-menu summary::-webkit-details-marker {
+		display: none;
+	}
+	.mx-menu__panel {
+		position: absolute;
+		inset: 100% 0 auto 0;
+		z-index: 40;
+		padding: 8px var(--mx-gutter) 20px;
+		background: var(--mx-canvas);
+		border-bottom: 1px solid var(--mx-line);
+		box-shadow: 0 12px 24px rgb(42 34 28 / 0.08);
+	}
+	.mx-menu__panel ul {
+		list-style: none;
+	}
+	.mx-menu__panel a {
+		display: block;
+		padding: 12px 0;
+		font-size: 17px;
+		color: var(--mx-ink);
+		text-decoration: none;
+		border-bottom: 1px solid var(--mx-line);
+	}
+
+	@media (max-width: 1100px) {
+		.mx-nav ul {
+			gap: 22px;
+		}
+	}
+	@media (max-width: 960px) {
+		.mx-nav,
+		.mx-header__actions > .mx-pill {
+			display: none;
+		}
+		.mx-menu {
+			display: block;
+		}
+		.mx-header__inner {
+			padding-block: 16px;
+		}
+	}
+
+	.mx-footer {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 12px 24px;
+		max-width: var(--mx-max);
+		width: 100%;
+		margin-inline: auto;
+		padding: 22px var(--mx-gutter);
+		font-size: 13px;
+		color: var(--mx-muted);
+	}
+	.mx-footer__links {
+		display: flex;
+		gap: 24px;
+	}
+	.mx-footer a {
+		color: inherit;
+		text-decoration: none;
+	}
+	.mx-footer a:hover {
+		color: var(--mx-ink);
+	}
+</style>

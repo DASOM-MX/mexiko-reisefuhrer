@@ -1,0 +1,141 @@
+---
+/** A "destinations" entry (Sehenswürdigkeit) in the given locale, in the 3a style. */
+import { Image, PortableText } from "emdash/ui";
+import Base from "../layouts/Base.astro";
+import { localePath, t, type Locale } from "../i18n/ui";
+import type { DestinationData } from "../lib/content";
+import "../styles/prose.css";
+
+interface Props extends DestinationData {
+	locale: Locale;
+}
+
+const { locale, entry, slug, seo, alternates, isFallback } = Astro.props;
+const ui = t(locale);
+const d = entry.data;
+const gallery = (d.gallery ?? []).map((row) => row.image).filter(Boolean);
+---
+
+<Base
+	title={seo.title}
+	pageTitle={seo.ogTitle}
+	description={seo.description ?? d.summary}
+	image={seo.ogImage}
+	canonical={seo.canonical}
+	robots={seo.robots}
+	locale={locale}
+	alternates={alternates}
+	content={{ collection: "destinations", id: d.id, slug }}
+>
+	<article class="dest">
+		<header class="dest__header">
+			{d.region && <p class="dest__region" {...entry.edit.region}>{d.region}</p>}
+			<h1 {...entry.edit.title}>{d.title}</h1>
+			{d.summary && <p class="dest__summary" {...entry.edit.summary}>{d.summary}</p>}
+			{isFallback && <p class="dest__fallback">{ui.translationFallback}</p>}
+		</header>
+		{
+			d.featured_image && (
+				<div class="dest__hero" {...entry.edit.featured_image}>
+					<Image image={d.featured_image} priority sizes="(max-width: 1280px) 100vw, 1152px" />
+				</div>
+			)
+		}
+		<div class="prose dest__body" {...entry.edit.content}>
+			<PortableText value={d.content} />
+		</div>
+		{
+			gallery.length > 0 && (
+				<div class="dest__gallery" {...entry.edit.gallery}>
+					{gallery.map((img) => (
+						<div class="dest__tile">
+							<Image image={img} sizes="(max-width: 800px) 50vw, 380px" />
+						</div>
+					))}
+				</div>
+			)
+		}
+		<p class="dest__back">
+			<a class="mx-link" href={localePath(locale, "/#sehenswuerdigkeiten")}>← {ui.backHome}</a>
+		</p>
+	</article>
+</Base>
+
+<style>
+	.dest {
+		max-width: var(--mx-max);
+		margin-inline: auto;
+		padding: clamp(48px, 6vw, 88px) var(--mx-gutter) clamp(64px, 8vw, 96px);
+	}
+	.dest__header {
+		max-width: 760px;
+	}
+	.dest__region {
+		margin-bottom: 14px;
+		font-size: 13px;
+		font-weight: 500;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--mx-accent);
+	}
+	.dest h1 {
+		font-size: clamp(40px, 3.6vw + 22px, 68px);
+		line-height: 1.02;
+		font-weight: 500;
+		letter-spacing: -0.035em;
+	}
+	.dest__summary {
+		margin-top: 24px;
+		font-size: 18px;
+		line-height: 1.6;
+		color: var(--mx-text-2);
+	}
+	.dest__fallback {
+		margin-top: 12px;
+		font-size: 14px;
+		color: var(--mx-muted);
+	}
+	.dest__hero,
+	.dest__tile {
+		overflow: hidden;
+		border-radius: 10px;
+		background: var(--mx-placeholder);
+	}
+	.dest__hero {
+		margin-top: 48px;
+		aspect-ratio: 16 / 8;
+	}
+	.dest__hero :global(img),
+	.dest__tile :global(img) {
+		display: block;
+		width: 100%;
+		height: 100%;
+		max-width: none;
+		object-fit: cover;
+	}
+	.dest__body {
+		max-width: var(--content-width);
+		margin: 48px auto 0;
+		font-size: 17px;
+		color: var(--mx-text-2);
+	}
+	.dest__gallery {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+		gap: 12px;
+		margin-top: 56px;
+	}
+	.dest__tile {
+		aspect-ratio: 4 / 3;
+		border-radius: 8px;
+	}
+	.dest__back {
+		margin-top: 56px;
+		font-size: 15px;
+	}
+	@media (max-width: 640px) {
+		.dest__hero {
+			aspect-ratio: 4 / 3;
+		}
+	}
+</style>

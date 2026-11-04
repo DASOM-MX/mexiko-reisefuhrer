@@ -1,0 +1,9 @@
+---
+import HomePage from "../../components/home/HomePage.astro";
+import { loadHome } from "../../lib/content";
+
+const data = await loadHome(Astro, "en");
+if (!data) return Astro.rewrite("/404");
+---
+
+<HomePage locale="en" {...data} />

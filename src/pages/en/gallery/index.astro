@@ -1,0 +1,9 @@
+---
+import GalleryIndexView from "../../../components/gallery/GalleryIndexView.astro";
+import { loadGalleryIndex } from "../../../lib/content";
+
+const data = await loadGalleryIndex(Astro, "en");
+if (!data) return Astro.rewrite("/404");
+---
+
+<GalleryIndexView locale="en" {...data} />

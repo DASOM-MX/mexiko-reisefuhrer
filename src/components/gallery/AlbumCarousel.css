@@ -1,0 +1,51 @@
+/* Bleed to the viewport edges so side cards aren't cut at the page gutter. */
+.alb-root { margin-inline: calc(-1 * var(--mx-gutter)); }
+.alb-stage {
+	position: relative; height: 320px;
+	/* Clip sideways only: rotated side cards may hang below the stage. */
+	overflow-x: clip; overflow-y: visible; user-select: none;
+	-webkit-user-select: none; touch-action: pan-y; cursor: grab;
+}
+.alb-stage:active { cursor: grabbing; }
+.alb-card {
+	position: absolute; inset: 0; margin: auto; width: 176px; height: 224px;
+	border-radius: 16px; overflow: hidden; background: var(--mx-sand);
+	will-change: transform;
+}
+.alb-link { position: absolute; inset: 0; display: block; color: var(--mx-on-dark); text-decoration: none; -webkit-user-drag: none; -webkit-tap-highlight-color: transparent; }
+.alb-img {
+	position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+	pointer-events: none; transition: opacity 600ms ease;
+}
+.alb-dim { position: absolute; inset: 0; background: #000; pointer-events: none; }
+.alb-grad { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to top, rgb(0 0 0 / 0.8), transparent 55%); }
+.alb-title {
+	position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; text-align: center;
+	color: #fff; font-size: 15px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.2;
+	pointer-events: none;
+}
+.alb-controls { display: flex; justify-content: center; gap: 12px; margin-top: 16px; }
+.alb-btn {
+	display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px;
+	border: 1px solid var(--mx-line); border-radius: 50%; background: transparent;
+	color: var(--mx-ink); cursor: pointer; transition: background-color 200ms ease;
+}
+.alb-btn:hover { background: var(--mx-sand); }
+.alb-link:focus-visible, .alb-btn:focus-visible { outline: 2px solid var(--mx-accent); outline-offset: 3px; }
+.alb-sr {
+	position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
+	clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+@media (min-width: 640px) {
+	.alb-stage { height: 448px; }
+	.alb-card { width: 224px; height: 320px; }
+	.alb-title { text-align: left; font-size: 18px; padding: 20px; }
+}
+@media (min-width: 1024px) {
+	.alb-stage { height: 512px; }
+	.alb-card { width: 256px; height: 384px; }
+	.alb-title { font-size: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.alb-img, .alb-btn { transition: none; }
+}

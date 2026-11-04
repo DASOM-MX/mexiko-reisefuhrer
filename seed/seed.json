@@ -1,0 +1,4460 @@
+{
+	"$schema": "https://emdashcms.com/seed.schema.json",
+	"version": "1",
+	"meta": {
+		"name": "Mexiko Reiseführer",
+		"description": "Individuelle Reisen durch Mexiko",
+		"author": "Juan José Garcia Arcos"
+	},
+	"defaultLocale": "de",
+	"settings": {
+		"title": "Mexiko Reiseführer",
+		"tagline": "Individuelle Reisen durch Mexiko mit lizenziertem Reiseleiter"
+	},
+	"collections": [
+		{
+			"slug": "home",
+			"label": "Startseite",
+			"labelSingular": "Startseite",
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Interner Titel",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "hero_title",
+					"label": "Hero: Überschrift",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "hero_text",
+					"label": "Hero: Einleitung",
+					"type": "text"
+				},
+				{
+					"slug": "hero_cta_primary",
+					"label": "Hero: Button (Kontakt)",
+					"type": "string"
+				},
+				{
+					"slug": "hero_cta_secondary",
+					"label": "Hero: Link (Angebote)",
+					"type": "string"
+				},
+				{
+					"slug": "hero_images",
+					"label": "Hero: Bilder (3)",
+					"type": "repeater",
+					"translatable": false,
+					"validation": {
+						"subFields": [
+							{
+								"slug": "image",
+								"label": "Bild",
+								"type": "image",
+								"required": true
+							}
+						]
+					}
+				},
+				{
+					"slug": "credentials",
+					"label": "Qualifikationen",
+					"type": "repeater",
+					"validation": {
+						"subFields": [
+							{
+								"slug": "title",
+								"label": "Titel",
+								"type": "string",
+								"required": true
+							},
+							{
+								"slug": "text",
+								"label": "Text",
+								"type": "string"
+							}
+						]
+					}
+				},
+				{
+					"slug": "offer_title",
+					"label": "Angebot: Überschrift",
+					"type": "string"
+				},
+				{
+					"slug": "offer_text",
+					"label": "Angebot: Text",
+					"type": "text"
+				},
+				{
+					"slug": "steps",
+					"label": "Angebot: Schritte",
+					"type": "repeater",
+					"validation": {
+						"subFields": [
+							{
+								"slug": "title",
+								"label": "Titel",
+								"type": "string",
+								"required": true
+							},
+							{
+								"slug": "text",
+								"label": "Text",
+								"type": "text"
+							}
+						]
+					}
+				},
+				{
+					"slug": "highlights_title",
+					"label": "Sehenswürdigkeiten: Überschrift",
+					"type": "string"
+				},
+				{
+					"slug": "highlights_link_label",
+					"label": "Sehenswürdigkeiten: Linktext",
+					"type": "string"
+				},
+				{
+					"slug": "highlights_link_url",
+					"label": "Sehenswürdigkeiten: Link-URL (leer = ausgeblendet)",
+					"type": "url",
+					"translatable": false
+				},
+				{
+					"slug": "about_eyebrow",
+					"label": "Über mich: Kleine Überschrift",
+					"type": "string"
+				},
+				{
+					"slug": "about_quote",
+					"label": "Über mich: Zitat",
+					"type": "text"
+				},
+				{
+					"slug": "about_text",
+					"label": "Über mich: Text",
+					"type": "portableText"
+				},
+				{
+					"slug": "about_image",
+					"label": "Über mich: Foto",
+					"type": "image",
+					"translatable": false
+				},
+				{
+					"slug": "about_link_label",
+					"label": "Über mich: Linktext",
+					"type": "string"
+				},
+				{
+					"slug": "about_link_url",
+					"label": "Über mich: Link-URL",
+					"type": "string"
+				},
+				{
+					"slug": "gallery_title",
+					"label": "Galerie: Überschrift",
+					"type": "string"
+				},
+				{
+					"slug": "gallery_link_label",
+					"label": "Galerie: Linktext",
+					"type": "string"
+				},
+				{
+					"slug": "gallery_page_title",
+					"label": "Galerie-Seite: Überschrift",
+					"type": "string"
+				},
+				{
+					"slug": "gallery_page_text",
+					"label": "Galerie-Seite: Einleitung",
+					"type": "text"
+				},
+				{
+					"slug": "gallery",
+					"label": "Galerie: Bilder (7)",
+					"type": "repeater",
+					"translatable": false,
+					"validation": {
+						"subFields": [
+							{
+								"slug": "image",
+								"label": "Bild",
+								"type": "image",
+								"required": true
+							}
+						]
+					}
+				},
+				{
+					"slug": "contact_title",
+					"label": "Kontakt: Überschrift",
+					"type": "string"
+				},
+				{
+					"slug": "contact_text",
+					"label": "Kontakt: Text",
+					"type": "text"
+				},
+				{
+					"slug": "contact_note",
+					"label": "Kontakt: Hinweis",
+					"type": "string"
+				},
+				{
+					"slug": "contact_form",
+					"label": "Kontakt: Formular-ID (aus Plugins → Forms)",
+					"type": "string"
+				},
+				{
+					"slug": "contact_privacy",
+					"label": "Kontakt: Datenschutzhinweis",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"slug": "destinations",
+			"label": "Sehenswürdigkeiten",
+			"labelSingular": "Sehenswürdigkeit",
+			"urlPattern": "/sehenswuerdigkeiten/{slug}",
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"search",
+				"seo"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Titel",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "region",
+					"label": "Region",
+					"type": "string"
+				},
+				{
+					"slug": "summary",
+					"label": "Kurzbeschreibung",
+					"type": "text",
+					"searchable": true
+				},
+				{
+					"slug": "featured_image",
+					"label": "Titelbild",
+					"type": "image",
+					"translatable": false
+				},
+				{
+					"slug": "content",
+					"label": "Inhalt",
+					"type": "portableText",
+					"searchable": true
+				},
+				{
+					"slug": "gallery",
+					"label": "Bildergalerie",
+					"type": "repeater",
+					"translatable": false,
+					"validation": {
+						"subFields": [
+							{
+								"slug": "image",
+								"label": "Bild",
+								"type": "image",
+								"required": true
+							}
+						]
+					}
+				},
+				{
+					"slug": "featured",
+					"label": "Auf der Startseite zeigen",
+					"type": "boolean",
+					"translatable": false
+				},
+				{
+					"slug": "sort_order",
+					"label": "Reihenfolge",
+					"type": "integer",
+					"translatable": false
+				}
+			]
+		},
+		{
+			"slug": "galleries",
+			"label": "Galerien",
+			"labelSingular": "Galerie",
+			"urlPattern": "/galerie/{slug}",
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"search",
+				"seo"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Titel",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "description",
+					"label": "Beschreibung",
+					"type": "text"
+				},
+				{
+					"slug": "cover",
+					"label": "Titelbild",
+					"type": "image",
+					"translatable": false
+				},
+				{
+					"slug": "photos",
+					"label": "Fotos (die ersten 3 erscheinen beim Überfahren der Karte)",
+					"type": "repeater",
+					"validation": {
+						"subFields": [
+							{
+								"slug": "image",
+								"label": "Bild",
+								"type": "image",
+								"required": true
+							},
+							{
+								"slug": "caption",
+								"label": "Bildunterschrift",
+								"type": "string"
+							}
+						]
+					}
+				},
+				{
+					"slug": "sort_order",
+					"label": "Reihenfolge",
+					"type": "integer",
+					"translatable": false
+				}
+			]
+		},
+		{
+			"slug": "testimonials",
+			"label": "Erfahrungsberichte",
+			"labelSingular": "Erfahrungsbericht",
+			"supports": [
+				"drafts",
+				"revisions"
+			],
+			"fields": [
+				{
+					"slug": "name",
+					"label": "Name",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "origin",
+					"label": "Herkunft (z. B. Hamburg)",
+					"type": "string"
+				},
+				{
+					"slug": "trip",
+					"label": "Reise",
+					"type": "string"
+				},
+				{
+					"slug": "quote",
+					"label": "Bericht",
+					"type": "text",
+					"required": true
+				},
+				{
+					"slug": "photo",
+					"label": "Foto",
+					"type": "image",
+					"translatable": false
+				},
+				{
+					"slug": "rating",
+					"label": "Bewertung (1–5)",
+					"type": "integer",
+					"translatable": false
+				},
+				{
+					"slug": "featured",
+					"label": "Auf der Startseite zeigen",
+					"type": "boolean",
+					"translatable": false
+				}
+			]
+		},
+		{
+			"slug": "posts",
+			"label": "Blog",
+			"labelSingular": "Blogbeitrag",
+			"urlPattern": "/posts/{slug}",
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"scheduling",
+				"search",
+				"seo"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Titel",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "featured_image",
+					"label": "Titelbild",
+					"type": "image",
+					"translatable": false
+				},
+				{
+					"slug": "content",
+					"label": "Inhalt",
+					"type": "portableText",
+					"searchable": true
+				},
+				{
+					"slug": "excerpt",
+					"label": "Kurzfassung",
+					"type": "text"
+				}
+			]
+		},
+		{
+			"slug": "pages",
+			"label": "Seiten",
+			"labelSingular": "Seite",
+			"urlPattern": "/pages/{slug}",
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"search",
+				"seo"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Titel",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "content",
+					"label": "Inhalt",
+					"type": "portableText",
+					"searchable": true
+				}
+			]
+		}
+	],
+	"taxonomies": [
+		{
+			"name": "category",
+			"label": "Kategorien",
+			"labelSingular": "Kategorie",
+			"hierarchical": true,
+			"collections": [
+				"posts"
+			],
+			"terms": [
+				{
+					"slug": "reiseberichte",
+					"label": "Reiseberichte"
+				},
+				{
+					"slug": "tipps",
+					"label": "Tipps"
+				}
+			]
+		},
+		{
+			"name": "tag",
+			"label": "Schlagwörter",
+			"labelSingular": "Schlagwort",
+			"hierarchical": false,
+			"collections": [
+				"posts"
+			],
+			"terms": []
+		}
+	],
+	"bylines": [
+		{
+			"id": "byline-juan",
+			"slug": "juan-jose-garcia-arcos",
+			"displayName": "Juan José Garcia Arcos"
+		}
+	],
+	"menus": [
+		{
+			"id": "menu-primary-de",
+			"name": "primary",
+			"label": "Hauptnavigation",
+			"locale": "de",
+			"items": [
+				{
+					"type": "custom",
+					"label": "Angebote",
+					"url": "/#angebote"
+				},
+				{
+					"type": "custom",
+					"label": "Sehenswürdigkeiten",
+					"url": "/#sehenswuerdigkeiten"
+				},
+				{
+					"type": "custom",
+					"label": "Galerie",
+					"url": "/galerie"
+				},
+				{
+					"type": "custom",
+					"label": "Über mich",
+					"url": "/#ueber-mich"
+				},
+				{
+					"type": "custom",
+					"label": "Blog",
+					"url": "/posts"
+				}
+			]
+		},
+		{
+			"id": "menu-primary-en",
+			"name": "primary",
+			"label": "Hauptnavigation",
+			"locale": "en",
+			"items": [
+				{
+					"type": "custom",
+					"label": "Tours",
+					"url": "/en/#angebote"
+				},
+				{
+					"type": "custom",
+					"label": "Highlights",
+					"url": "/en/#sehenswuerdigkeiten"
+				},
+				{
+					"type": "custom",
+					"label": "Gallery",
+					"url": "/en/gallery"
+				},
+				{
+					"type": "custom",
+					"label": "About me",
+					"url": "/en/#ueber-mich"
+				}
+			],
+			"translationOf": "menu-primary-de"
+		},
+		{
+			"id": "menu-primary-es",
+			"name": "primary",
+			"label": "Hauptnavigation",
+			"locale": "es",
+			"items": [
+				{
+					"type": "custom",
+					"label": "Viajes",
+					"url": "/es/#angebote"
+				},
+				{
+					"type": "custom",
+					"label": "Lugares",
+					"url": "/es/#sehenswuerdigkeiten"
+				},
+				{
+					"type": "custom",
+					"label": "Galería",
+					"url": "/es/galeria"
+				},
+				{
+					"type": "custom",
+					"label": "Sobre mí",
+					"url": "/es/#ueber-mich"
+				}
+			],
+			"translationOf": "menu-primary-de"
+		}
+	],
+	"widgetAreas": [
+		{
+			"name": "sidebar",
+			"label": "Seitenleiste",
+			"description": "Neben Blogbeiträgen",
+			"widgets": [
+				{
+					"type": "component",
+					"componentId": "core:recent-posts",
+					"title": "Neueste Beiträge",
+					"props": {
+						"count": 5,
+						"showDate": true
+					}
+				},
+				{
+					"type": "component",
+					"componentId": "core:categories",
+					"title": "Kategorien"
+				}
+			]
+		}
+	],
+	"content": {
+		"home": [
+			{
+				"id": "home-de",
+				"slug": "startseite",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Startseite",
+					"hero_title": "Ihre Eintrittskarte für die schönsten Plätze Mexikos",
+					"hero_text": "Individuelle Reisen für Alleinreisende, Paare und kleine Gruppen bis zu 6 Personen. Ich hole Sie am Flughafen in Mexiko-City ab.",
+					"hero_cta_primary": "Reisewunsch schicken",
+					"hero_cta_secondary": "Angebote ansehen",
+					"credentials": [
+						{
+							"title": "Lizenziert",
+							"text": "Gültige Reiseleiterlizenz seit Dezember 2005"
+						},
+						{
+							"title": "Registriert",
+							"text": "Tourismus- und Handelskammer von Mexiko-Stadt"
+						},
+						{
+							"title": "Diplomiert",
+							"text": "Nationale Schule für Anthropologie und Geschichte"
+						},
+						{
+							"title": "Auch als Fahrer",
+							"text": "Reiseleitung und Transport aus einer Hand"
+						}
+					],
+					"offer_title": "Individualreisen",
+					"offer_text": "Die Reise wird individuell zusammengestellt. Wer Mexiko auf eine besondere, persönliche Art und Weise kennen lernen möchte, kann sich an mich wenden.",
+					"steps": [
+						{
+							"title": "Wunsch mitteilen",
+							"text": "Zeitraum Ihres Reisewunsches und gewünschte Reiseziele in Mexiko."
+						},
+						{
+							"title": "Route abstimmen",
+							"text": "Ich empfehle Ihnen eine Reiseroute und spreche sie gemeinsam mit Ihnen ab."
+						},
+						{
+							"title": "Gemeinsam reisen",
+							"text": "Der Preis richtet sich nach den vereinbarten Gegebenheiten."
+						}
+					],
+					"highlights_title": "Sehenswürdigkeiten",
+					"highlights_link_label": "Alle ansehen",
+					"about_eyebrow": "Liebe Reisefreunde",
+					"about_quote": "„Gehen wir gemeinsam in die große Pyramide unserer Kultur, nach Mexiko-City, in die hohen Berge, in den tiefen Dschungel oder an die rauschenden Küsten unserer Meere.“",
+					"about_text": [
+						{
+							"_type": "block",
+							"_key": "k33",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k30",
+									"text": "Mein Name ist "
+								},
+								{
+									"_type": "span",
+									"_key": "k31",
+									"text": "Juan José Garcia Arcos",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k32",
+									"text": ". Ich bin Mexikaner, habe in Mexiko, Santo Domingo und Hamburg studiert und zwischen 1995 und 2005 in Deutschland Spanisch unterrichtet. Zur Zeit absolviere ich ein Seminar über die Schriften der Maya."
+								}
+							]
+						}
+					],
+					"about_link_label": "Meine ganze Geschichte",
+					"about_link_url": "/pages/ueber-mich",
+					"gallery_title": "Ein Bild sagt mehr als 1000 Worte",
+					"gallery_link_label": "Zur Galerie",
+					"gallery_page_title": "Galerie",
+					"gallery_page_text": "Eindrücke von meinen Reisen durch Mexiko, nach Orten sortiert. Wählen Sie ein Album und blättern Sie durch die Fotos.",
+					"contact_title": "Kontakt",
+					"contact_text": "Bei Fragen zu einem Angebot oder zur Buchung schreiben Sie mir. Ich melde mich schnellstmöglich bei Ihnen.",
+					"contact_note": "Postanschrift und Telefon finden Sie im Impressum.",
+					"contact_form": "kontakt-de",
+					"contact_privacy": "Mit dem Absenden akzeptieren Sie die Datenschutzerklärung.",
+					"hero_images": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040628.JPG",
+									"alt": "Reise durch Mexiko",
+									"filename": "p1040628.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050130.JPG",
+									"alt": "Landschaft in Mexiko",
+									"filename": "p1050130.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/camaranueva080.jpg",
+									"alt": "Unterwegs in Mexiko",
+									"filename": "camaranueva080.jpg"
+								}
+							}
+						}
+					],
+					"gallery": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040651.JPG",
+									"alt": "Galeriebild 1",
+									"filename": "p1040651.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050136.JPG",
+									"alt": "Galeriebild 2",
+									"filename": "p1050136.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6450.JPG",
+									"alt": "Galeriebild 3",
+									"filename": "img_6450.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050691.JPG",
+									"alt": "Galeriebild 4",
+									"filename": "p1050691.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050169.JPG",
+									"alt": "Galeriebild 5",
+									"filename": "p1050169.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/ballena6.jpg",
+									"alt": "Wal in Baja California",
+									"filename": "ballena6.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/camaranueva106.jpg",
+									"alt": "Galeriebild 7",
+									"filename": "camaranueva106.jpg"
+								}
+							}
+						}
+					],
+					"about_image": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/rl.png",
+							"alt": "Juan José Garcia Arcos",
+							"filename": "juan-jose-garcia-arcos.png"
+						}
+					}
+				}
+			},
+			{
+				"id": "home-en",
+				"slug": "startseite",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Home",
+					"hero_title": "Your ticket to Mexico’s most beautiful places",
+					"hero_text": "Private tours for solo travellers, couples and small groups of up to 6 people. I’ll pick you up at the airport in Mexico City.",
+					"hero_cta_primary": "Send your travel wish",
+					"hero_cta_secondary": "See the tours",
+					"credentials": [
+						{
+							"title": "Licensed",
+							"text": "Official tour guide licence since December 2005"
+						},
+						{
+							"title": "Registered",
+							"text": "Chamber of Tourism and Commerce of Mexico City"
+						},
+						{
+							"title": "Graduated",
+							"text": "National School of Anthropology and History"
+						},
+						{
+							"title": "Also your driver",
+							"text": "Guiding and transport from one person"
+						}
+					],
+					"offer_title": "Private tours",
+					"offer_text": "Every trip is put together individually. If you want to get to know Mexico in a special, personal way, get in touch with me.",
+					"steps": [
+						{
+							"title": "Share your wish",
+							"text": "When you would like to travel and which places in Mexico you want to see."
+						},
+						{
+							"title": "Agree on a route",
+							"text": "I suggest a route and we fine-tune it together."
+						},
+						{
+							"title": "Travel together",
+							"text": "The price depends on what we agree on."
+						}
+					],
+					"highlights_title": "Highlights",
+					"highlights_link_label": "See all",
+					"about_eyebrow": "Dear fellow travellers",
+					"about_quote": "“Let’s walk together into the great pyramid of our culture: Mexico City, the high mountains, the deep jungle and the roaring coasts of our seas.”",
+					"about_text": [
+						{
+							"_type": "block",
+							"_key": "k37",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k34",
+									"text": "My name is "
+								},
+								{
+									"_type": "span",
+									"_key": "k35",
+									"text": "Juan José Garcia Arcos",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k36",
+									"text": ". I am Mexican, studied in Mexico, Santo Domingo and Hamburg, and taught Spanish in Germany between 1995 and 2005. I am currently taking a seminar on the Maya scripts."
+								}
+							]
+						}
+					],
+					"about_link_label": "My whole story",
+					"about_link_url": "/en/pages/ueber-mich",
+					"gallery_title": "A picture is worth a thousand words",
+					"gallery_link_label": "Go to the gallery",
+					"gallery_page_title": "Gallery",
+					"gallery_page_text": "Impressions from my trips through Mexico, sorted by place. Pick an album and browse the photos.",
+					"contact_title": "Contact",
+					"contact_text": "Questions about a tour or a booking? Write to me and I’ll get back to you as soon as possible.",
+					"contact_note": "You’ll find my postal address and phone number in the legal notice.",
+					"contact_form": "kontakt-en",
+					"contact_privacy": "By sending, you accept the privacy policy.",
+					"hero_images": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040628.JPG",
+									"alt": "Reise durch Mexiko",
+									"filename": "p1040628.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050130.JPG",
+									"alt": "Landschaft in Mexiko",
+									"filename": "p1050130.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/camaranueva080.jpg",
+									"alt": "Unterwegs in Mexiko",
+									"filename": "camaranueva080.jpg"
+								}
+							}
+						}
+					],
+					"gallery": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040651.JPG",
+									"alt": "Galeriebild 1",
+									"filename": "p1040651.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050136.JPG",
+									"alt": "Galeriebild 2",
+									"filename": "p1050136.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6450.JPG",
+									"alt": "Galeriebild 3",
+									"filename": "img_6450.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050691.JPG",
+									"alt": "Galeriebild 4",
+									"filename": "p1050691.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050169.JPG",
+									"alt": "Galeriebild 5",
+									"filename": "p1050169.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/ballena6.jpg",
+									"alt": "Wal in Baja California",
+									"filename": "ballena6.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/camaranueva106.jpg",
+									"alt": "Galeriebild 7",
+									"filename": "camaranueva106.jpg"
+								}
+							}
+						}
+					],
+					"about_image": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/rl.png",
+							"alt": "Juan José Garcia Arcos",
+							"filename": "juan-jose-garcia-arcos.png"
+						}
+					}
+				},
+				"translationOf": "home-de"
+			},
+			{
+				"id": "home-es",
+				"slug": "startseite",
+				"locale": "es",
+				"status": "published",
+				"data": {
+					"title": "Inicio",
+					"hero_title": "Tu boleto a los lugares más bellos de México",
+					"hero_text": "Viajes a la medida para viajeros solos, parejas y grupos pequeños de hasta 6 personas. Te recojo en el aeropuerto de la Ciudad de México.",
+					"hero_cta_primary": "Envía tu idea de viaje",
+					"hero_cta_secondary": "Ver los viajes",
+					"credentials": [
+						{
+							"title": "Con licencia",
+							"text": "Licencia oficial de guía de turistas desde diciembre de 2005"
+						},
+						{
+							"title": "Registrado",
+							"text": "Cámara de Turismo y Comercio de la Ciudad de México"
+						},
+						{
+							"title": "Titulado",
+							"text": "Escuela Nacional de Antropología e Historia"
+						},
+						{
+							"title": "También chofer",
+							"text": "Guía y transporte de una sola mano"
+						}
+					],
+					"offer_title": "Viajes a la medida",
+					"offer_text": "Cada viaje se arma de forma individual. Si quieres conocer México de una manera especial y personal, escríbeme.",
+					"steps": [
+						{
+							"title": "Cuéntame tu idea",
+							"text": "Las fechas de tu viaje y los destinos de México que quieres conocer."
+						},
+						{
+							"title": "Definimos la ruta",
+							"text": "Te recomiendo una ruta y la ajustamos juntos."
+						},
+						{
+							"title": "Viajamos juntos",
+							"text": "El precio depende de lo que acordemos."
+						}
+					],
+					"highlights_title": "Lugares de interés",
+					"highlights_link_label": "Ver todos",
+					"about_eyebrow": "Queridos viajeros",
+					"about_quote": "«Entremos juntos a la gran pirámide de nuestra cultura: la Ciudad de México, las altas montañas, la selva profunda y las costas rumorosas de nuestros mares.»",
+					"about_text": [
+						{
+							"_type": "block",
+							"_key": "k41",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k38",
+									"text": "Me llamo "
+								},
+								{
+									"_type": "span",
+									"_key": "k39",
+									"text": "Juan José Garcia Arcos",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k40",
+									"text": ". Soy mexicano, estudié en México, Santo Domingo y Hamburgo, y entre 1995 y 2005 di clases de español en Alemania. Actualmente curso un seminario sobre las escrituras mayas."
+								}
+							]
+						}
+					],
+					"about_link_label": "Mi historia completa",
+					"about_link_url": "/es/pages/ueber-mich",
+					"gallery_title": "Una imagen vale más que mil palabras",
+					"gallery_link_label": "Ir a la galería",
+					"gallery_page_title": "Galería",
+					"gallery_page_text": "Imágenes de mis viajes por México, ordenadas por lugar. Elige un álbum y recorre las fotos.",
+					"contact_title": "Contacto",
+					"contact_text": "¿Preguntas sobre un viaje o una reservación? Escríbeme y te respondo lo antes posible.",
+					"contact_note": "Mi dirección postal y teléfono están en el aviso legal.",
+					"contact_form": "kontakt-es",
+					"contact_privacy": "Al enviar aceptas el aviso de privacidad.",
+					"hero_images": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040628.JPG",
+									"alt": "Reise durch Mexiko",
+									"filename": "p1040628.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050130.JPG",
+									"alt": "Landschaft in Mexiko",
+									"filename": "p1050130.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/camaranueva080.jpg",
+									"alt": "Unterwegs in Mexiko",
+									"filename": "camaranueva080.jpg"
+								}
+							}
+						}
+					],
+					"gallery": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040651.JPG",
+									"alt": "Galeriebild 1",
+									"filename": "p1040651.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050136.JPG",
+									"alt": "Galeriebild 2",
+									"filename": "p1050136.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6450.JPG",
+									"alt": "Galeriebild 3",
+									"filename": "img_6450.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050691.JPG",
+									"alt": "Galeriebild 4",
+									"filename": "p1050691.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050169.JPG",
+									"alt": "Galeriebild 5",
+									"filename": "p1050169.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/ballena6.jpg",
+									"alt": "Wal in Baja California",
+									"filename": "ballena6.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/camaranueva106.jpg",
+									"alt": "Galeriebild 7",
+									"filename": "camaranueva106.jpg"
+								}
+							}
+						}
+					],
+					"about_image": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/rl.png",
+							"alt": "Juan José Garcia Arcos",
+							"filename": "juan-jose-garcia-arcos.png"
+						}
+					}
+				},
+				"translationOf": "home-de"
+			}
+		],
+		"destinations": [
+			{
+				"id": "dest-sur-de",
+				"slug": "suedmexiko",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Kultur und Natur",
+					"region": "Südmexiko",
+					"summary": "Maya-Stätten, Kolonialstädte und Regenwald: Der Süden Mexikos verbindet Geschichte und Natur wie kaum eine andere Region.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k43",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k42",
+									"text": "Im Süden Mexikos liegen einige der eindrucksvollsten archäologischen Stätten des Landes, umgeben von Bergen, Dschungel und lebendigen indigenen Traditionen."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k45",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k44",
+									"text": "Gemeinsam stellen wir eine Route zusammen, die zu Ihren Interessen passt."
+								}
+							]
+						}
+					],
+					"featured_image": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/camaranueva059.jpg",
+							"alt": "Südmexiko",
+							"filename": "camaranueva059.jpg"
+						}
+					},
+					"featured": true,
+					"sort_order": 1
+				}
+			},
+			{
+				"id": "dest-sur-en",
+				"slug": "southern-mexico",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Culture and nature",
+					"region": "Southern Mexico",
+					"summary": "Maya sites, colonial towns and rainforest: southern Mexico combines history and nature like few other regions.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k47",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k46",
+									"text": "Southern Mexico is home to some of the country’s most impressive archaeological sites, surrounded by mountains, jungle and living indigenous traditions."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k49",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k48",
+									"text": "Together we put together a route that matches your interests."
+								}
+							]
+						}
+					],
+					"featured_image": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/camaranueva059.jpg",
+							"alt": "Südmexiko",
+							"filename": "camaranueva059.jpg"
+						}
+					},
+					"featured": true,
+					"sort_order": 1
+				},
+				"translationOf": "dest-sur-de"
+			},
+			{
+				"id": "dest-sur-es",
+				"slug": "sur-de-mexico",
+				"locale": "es",
+				"status": "published",
+				"data": {
+					"title": "Cultura y naturaleza",
+					"region": "Sur de México",
+					"summary": "Zonas mayas, ciudades coloniales y selva: el sur de México une historia y naturaleza como pocas regiones.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k51",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k50",
+									"text": "En el sur de México se encuentran algunas de las zonas arqueológicas más impresionantes del país, rodeadas de montañas, selva y tradiciones indígenas vivas."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k53",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k52",
+									"text": "Juntos armamos una ruta a la medida de tus intereses."
+								}
+							]
+						}
+					],
+					"featured_image": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/camaranueva059.jpg",
+							"alt": "Südmexiko",
+							"filename": "camaranueva059.jpg"
+						}
+					},
+					"featured": true,
+					"sort_order": 1
+				},
+				"translationOf": "dest-sur-de"
+			},
+			{
+				"id": "dest-baja-de",
+				"slug": "baja-california",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Tierwelt zum Anfassen",
+					"region": "Baja California",
+					"summary": "Grauwale in den Lagunen der Halbinsel, Seelöwen und Wüstenlandschaften am Meer.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k55",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k54",
+									"text": "Jedes Jahr ziehen Grauwale in die geschützten Lagunen von Baja California, um dort ihre Jungen zur Welt zu bringen."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k57",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k56",
+									"text": "Eine Reise für alle, die Natur aus nächster Nähe erleben möchten."
+								}
+							]
+						}
+					],
+					"featured_image": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/ballena4.jpg",
+							"alt": "Grauwal in Baja California",
+							"filename": "ballena4.jpg"
+						}
+					},
+					"featured": true,
+					"sort_order": 2
+				}
+			},
+			{
+				"id": "dest-baja-en",
+				"slug": "baja-california",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Wildlife up close",
+					"region": "Baja California",
+					"summary": "Grey whales in the peninsula’s lagoons, sea lions and desert landscapes by the sea.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k59",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k58",
+									"text": "Every year grey whales migrate to the sheltered lagoons of Baja California to give birth to their calves."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k61",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k60",
+									"text": "A trip for anyone who wants to experience nature up close."
+								}
+							]
+						}
+					],
+					"featured_image": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/ballena4.jpg",
+							"alt": "Grauwal in Baja California",
+							"filename": "ballena4.jpg"
+						}
+					},
+					"featured": true,
+					"sort_order": 2
+				},
+				"translationOf": "dest-baja-de"
+			},
+			{
+				"id": "dest-baja-es",
+				"slug": "baja-california",
+				"locale": "es",
+				"status": "published",
+				"data": {
+					"title": "Fauna de cerca",
+					"region": "Baja California",
+					"summary": "Ballenas grises en las lagunas de la península, lobos marinos y paisajes de desierto junto al mar.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k63",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k62",
+									"text": "Cada año las ballenas grises llegan a las lagunas protegidas de Baja California para dar a luz a sus crías."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k65",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k64",
+									"text": "Un viaje para quienes quieren vivir la naturaleza de cerca."
+								}
+							]
+						}
+					],
+					"featured_image": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/ballena4.jpg",
+							"alt": "Grauwal in Baja California",
+							"filename": "ballena4.jpg"
+						}
+					},
+					"featured": true,
+					"sort_order": 2
+				},
+				"translationOf": "dest-baja-de"
+			}
+		],
+		"galleries": [
+			{
+				"id": "gal-baja-de",
+				"slug": "baja-california",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Baja California",
+					"description": "Seelöwen, Pelikane, Fregattvögel, ein Kojote und Kakteen an der Küste der Halbinsel.",
+					"cover": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6183.JPG",
+							"alt": "Küste von Baja California",
+							"filename": "img_6183.jpg"
+						}
+					},
+					"photos": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6450.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6450.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_5893.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_5893.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6358.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6358.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/1-IMG_5845.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "1-img_5845.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_5942.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_5942.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6160.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6160.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6185.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6185.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6352.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6352.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6053.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6053.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6383.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6383.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6422.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6422.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6423.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6423.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6452.jpg",
+									"alt": "Baja California: Foto",
+									"filename": "img_6452.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6261.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6261.jpg"
+								}
+							}
+						}
+					],
+					"sort_order": 1
+				}
+			},
+			{
+				"id": "gal-baja-en",
+				"slug": "baja-california",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Baja California",
+					"description": "Sea lions, pelicans, frigate birds, a coyote and cacti along the peninsula’s coast.",
+					"cover": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6183.JPG",
+							"alt": "Küste von Baja California",
+							"filename": "img_6183.jpg"
+						}
+					},
+					"photos": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6450.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6450.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_5893.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_5893.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6358.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6358.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/1-IMG_5845.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "1-img_5845.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_5942.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_5942.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6160.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6160.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6185.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6185.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6352.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6352.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6053.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6053.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6383.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6383.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6422.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6422.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6423.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6423.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6452.jpg",
+									"alt": "Baja California: Foto",
+									"filename": "img_6452.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6261.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6261.jpg"
+								}
+							}
+						}
+					],
+					"sort_order": 1
+				},
+				"translationOf": "gal-baja-de"
+			},
+			{
+				"id": "gal-baja-es",
+				"slug": "baja-california",
+				"locale": "es",
+				"status": "published",
+				"data": {
+					"title": "Baja California",
+					"description": "Lobos marinos, pelícanos, fragatas, un coyote y cactus en la costa de la península.",
+					"cover": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6183.JPG",
+							"alt": "Küste von Baja California",
+							"filename": "img_6183.jpg"
+						}
+					},
+					"photos": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6450.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6450.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_5893.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_5893.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6358.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6358.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/1-IMG_5845.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "1-img_5845.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_5942.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_5942.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6160.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6160.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6185.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6185.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6352.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6352.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6053.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6053.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6383.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6383.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6422.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6422.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6423.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6423.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6452.jpg",
+									"alt": "Baja California: Foto",
+									"filename": "img_6452.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/IMG_6261.JPG",
+									"alt": "Baja California: Foto",
+									"filename": "img_6261.jpg"
+								}
+							}
+						}
+					],
+					"sort_order": 1
+				},
+				"translationOf": "gal-baja-de"
+			},
+			{
+				"id": "gal-cdmx-de",
+				"slug": "mexiko-stadt",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Mexiko-Stadt",
+					"description": "Wandbilder, Paläste und Plätze der Hauptstadt, vom Palacio de Bellas Artes bis zur Basilika von Guadalupe.",
+					"cover": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040651.JPG",
+							"alt": "Wandbild von Diego Rivera im Palacio de Bellas Artes",
+							"filename": "p1040651.jpg"
+						}
+					},
+					"photos": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040626.JPG",
+									"alt": "Treppenhaus im Palacio Postal",
+									"filename": "p1040626.jpg"
+								}
+							},
+							"caption": "Treppenhaus im Palacio Postal"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050169.JPG",
+									"alt": "Ángel de la Independencia",
+									"filename": "p1050169.jpg"
+								}
+							},
+							"caption": "Ángel de la Independencia"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040660.JPG",
+									"alt": "Im Palacio de Bellas Artes",
+									"filename": "p1040660.jpg"
+								}
+							},
+							"caption": "Im Palacio de Bellas Artes"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040623.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040623.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040628.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040628.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040650.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040650.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040633.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040633.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040581.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040581.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040595.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040595.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040597.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040597.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040602.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040602.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040605.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040605.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040606.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040606.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040615.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040615.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050075.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1050075.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050089.JPG",
+									"alt": "Jungfrau von Guadalupe in der Basilika",
+									"filename": "p1050089.jpg"
+								}
+							},
+							"caption": "Jungfrau von Guadalupe in der Basilika"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050190.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1050190.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050200.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1050200.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050202.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1050202.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050246.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1050246.jpg"
+								}
+							}
+						}
+					],
+					"sort_order": 2
+				}
+			},
+			{
+				"id": "gal-cdmx-en",
+				"slug": "mexico-city",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Mexico City",
+					"description": "Murals, palaces and squares of the capital, from the Palacio de Bellas Artes to the Basilica of Guadalupe.",
+					"cover": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040651.JPG",
+							"alt": "Wandbild von Diego Rivera im Palacio de Bellas Artes",
+							"filename": "p1040651.jpg"
+						}
+					},
+					"photos": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040626.JPG",
+									"alt": "Treppenhaus im Palacio Postal",
+									"filename": "p1040626.jpg"
+								}
+							},
+							"caption": "Staircase in the Palacio Postal"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050169.JPG",
+									"alt": "Ángel de la Independencia",
+									"filename": "p1050169.jpg"
+								}
+							},
+							"caption": "Angel of Independence"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040660.JPG",
+									"alt": "Im Palacio de Bellas Artes",
+									"filename": "p1040660.jpg"
+								}
+							},
+							"caption": "Inside the Palacio de Bellas Artes"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040623.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040623.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040628.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040628.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040650.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040650.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040633.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040633.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040581.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040581.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040595.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040595.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040597.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040597.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040602.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040602.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040605.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040605.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040606.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040606.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040615.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040615.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050075.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1050075.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050089.JPG",
+									"alt": "Jungfrau von Guadalupe in der Basilika",
+									"filename": "p1050089.jpg"
+								}
+							},
+							"caption": "Virgin of Guadalupe in the Basilica"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050190.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1050190.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050200.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1050200.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050202.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1050202.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050246.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1050246.jpg"
+								}
+							}
+						}
+					],
+					"sort_order": 2
+				},
+				"translationOf": "gal-cdmx-de"
+			},
+			{
+				"id": "gal-cdmx-es",
+				"slug": "ciudad-de-mexico",
+				"locale": "es",
+				"status": "published",
+				"data": {
+					"title": "Ciudad de México",
+					"description": "Murales, palacios y plazas de la capital, del Palacio de Bellas Artes a la Basílica de Guadalupe.",
+					"cover": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040651.JPG",
+							"alt": "Wandbild von Diego Rivera im Palacio de Bellas Artes",
+							"filename": "p1040651.jpg"
+						}
+					},
+					"photos": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040626.JPG",
+									"alt": "Treppenhaus im Palacio Postal",
+									"filename": "p1040626.jpg"
+								}
+							},
+							"caption": "Escalera del Palacio Postal"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050169.JPG",
+									"alt": "Ángel de la Independencia",
+									"filename": "p1050169.jpg"
+								}
+							},
+							"caption": "Ángel de la Independencia"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040660.JPG",
+									"alt": "Im Palacio de Bellas Artes",
+									"filename": "p1040660.jpg"
+								}
+							},
+							"caption": "Interior del Palacio de Bellas Artes"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040623.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040623.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040628.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040628.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040650.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040650.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040633.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040633.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040581.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040581.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040595.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040595.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040597.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040597.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040602.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040602.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040605.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040605.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040606.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040606.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040615.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1040615.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050075.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1050075.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050089.JPG",
+									"alt": "Jungfrau von Guadalupe in der Basilika",
+									"filename": "p1050089.jpg"
+								}
+							},
+							"caption": "Virgen de Guadalupe en la Basílica"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050190.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1050190.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050200.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1050200.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050202.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1050202.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050246.JPG",
+									"alt": "Mexiko-Stadt: Foto",
+									"filename": "p1050246.jpg"
+								}
+							}
+						}
+					],
+					"sort_order": 2
+				},
+				"translationOf": "gal-cdmx-de"
+			},
+			{
+				"id": "gal-teotihuacan-de",
+				"slug": "teotihuacan",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Teotihuacán",
+					"description": "Die Sonnen- und die Mondpyramide und die Stadt der Götter.",
+					"cover": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050130.JPG",
+							"alt": "Sonnenpyramide in Teotihuacán",
+							"filename": "p1050130.jpg"
+						}
+					},
+					"photos": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050136.JPG",
+									"alt": "Mondpyramide",
+									"filename": "p1050136.jpg"
+								}
+							},
+							"caption": "Mondpyramide"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050098.JPG",
+									"alt": "Teotihuacán: Foto",
+									"filename": "p1050098.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050120.JPG",
+									"alt": "Teotihuacán: Foto",
+									"filename": "p1050120.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050092.JPG",
+									"alt": "Teotihuacán: Foto",
+									"filename": "p1050092.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050094.JPG",
+									"alt": "Teotihuacán: Foto",
+									"filename": "p1050094.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050126.JPG",
+									"alt": "Teotihuacán: Foto",
+									"filename": "p1050126.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050128.JPG",
+									"alt": "Teotihuacán: Foto",
+									"filename": "p1050128.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050141.JPG",
+									"alt": "Teotihuacán: Foto",
+									"filename": "p1050141.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050152.JPG",
+									"alt": "Teotihuacán: Foto",
+									"filename": "p1050152.jpg"
+								}
+							}
+						}
+					],
+					"sort_order": 3
+				}
+			},
+			{
+				"id": "gal-teotihuacan-en",
+				"slug": "teotihuacan",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Teotihuacán",
+					"description": "The Pyramids of the Sun and the Moon and the city of the gods.",
+					"cover": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050130.JPG",
+							"alt": "Sonnenpyramide in Teotihuacán",
+							"filename": "p1050130.jpg"
+						}
+					},
+					"photos": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050136.JPG",
+									"alt": "Mondpyramide",
+									"filename": "p1050136.jpg"
+								}
+							},
+							"caption": "Pyramid of the Moon"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050098.JPG",
+									"alt": "Teotihuacán: Foto",
+									"filename": "p1050098.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050120.JPG",
+									"alt": "Teotihuacán: Foto",
+									"filename": "p1050120.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050092.JPG",
+									"alt": "Teotihuacán: Foto",
+									"filename": "p1050092.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050094.JPG",
+									"alt": "Teotihuacán: Foto",
+									"filename": "p1050094.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050126.JPG",
+									"alt": "Teotihuacán: Foto",
+									"filename": "p1050126.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050128.JPG",
+									"alt": "Teotihuacán: Foto",
+									"filename": "p1050128.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050141.JPG",
+									"alt": "Teotihuacán: Foto",
+									"filename": "p1050141.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050152.JPG",
+									"alt": "Teotihuacán: Foto",
+									"filename": "p1050152.jpg"
+								}
+							}
+						}
+					],
+					"sort_order": 3
+				},
+				"translationOf": "gal-teotihuacan-de"
+			},
+			{
+				"id": "gal-teotihuacan-es",
+				"slug": "teotihuacan",
+				"locale": "es",
+				"status": "published",
+				"data": {
+					"title": "Teotihuacán",
+					"description": "Las pirámides del Sol y de la Luna y la ciudad de los dioses.",
+					"cover": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050130.JPG",
+							"alt": "Sonnenpyramide in Teotihuacán",
+							"filename": "p1050130.jpg"
+						}
+					},
+					"photos": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050136.JPG",
+									"alt": "Mondpyramide",
+									"filename": "p1050136.jpg"
+								}
+							},
+							"caption": "Pirámide de la Luna"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050098.JPG",
+									"alt": "Teotihuacán: Foto",
+									"filename": "p1050098.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050120.JPG",
+									"alt": "Teotihuacán: Foto",
+									"filename": "p1050120.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050092.JPG",
+									"alt": "Teotihuacán: Foto",
+									"filename": "p1050092.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050094.JPG",
+									"alt": "Teotihuacán: Foto",
+									"filename": "p1050094.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050126.JPG",
+									"alt": "Teotihuacán: Foto",
+									"filename": "p1050126.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050128.JPG",
+									"alt": "Teotihuacán: Foto",
+									"filename": "p1050128.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050141.JPG",
+									"alt": "Teotihuacán: Foto",
+									"filename": "p1050141.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050152.JPG",
+									"alt": "Teotihuacán: Foto",
+									"filename": "p1050152.jpg"
+								}
+							}
+						}
+					],
+					"sort_order": 3
+				},
+				"translationOf": "gal-teotihuacan-de"
+			},
+			{
+				"id": "gal-taxco-de",
+				"slug": "taxco",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Taxco",
+					"description": "Die Silberstadt in den Bergen von Guerrero mit ihren weißen Häusern und der Kirche Santa Prisca.",
+					"cover": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050353.JPG",
+							"alt": "Santa Prisca über der Stadt Taxco",
+							"filename": "p1050353.jpg"
+						}
+					},
+					"photos": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050352.JPG",
+									"alt": "Taxco: Foto",
+									"filename": "p1050352.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050381.JPG",
+									"alt": "Taxco: Foto",
+									"filename": "p1050381.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050386.JPG",
+									"alt": "Taxco: Foto",
+									"filename": "p1050386.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050358.JPG",
+									"alt": "Taxco: Foto",
+									"filename": "p1050358.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050394.JPG",
+									"alt": "Taxco: Foto",
+									"filename": "p1050394.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050345.JPG",
+									"alt": "Taxco: Foto",
+									"filename": "p1050345.jpg"
+								}
+							}
+						}
+					],
+					"sort_order": 4
+				}
+			},
+			{
+				"id": "gal-taxco-en",
+				"slug": "taxco",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Taxco",
+					"description": "The silver town in the mountains of Guerrero, with its white houses and the church of Santa Prisca.",
+					"cover": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050353.JPG",
+							"alt": "Santa Prisca über der Stadt Taxco",
+							"filename": "p1050353.jpg"
+						}
+					},
+					"photos": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050352.JPG",
+									"alt": "Taxco: Foto",
+									"filename": "p1050352.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050381.JPG",
+									"alt": "Taxco: Foto",
+									"filename": "p1050381.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050386.JPG",
+									"alt": "Taxco: Foto",
+									"filename": "p1050386.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050358.JPG",
+									"alt": "Taxco: Foto",
+									"filename": "p1050358.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050394.JPG",
+									"alt": "Taxco: Foto",
+									"filename": "p1050394.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050345.JPG",
+									"alt": "Taxco: Foto",
+									"filename": "p1050345.jpg"
+								}
+							}
+						}
+					],
+					"sort_order": 4
+				},
+				"translationOf": "gal-taxco-de"
+			},
+			{
+				"id": "gal-taxco-es",
+				"slug": "taxco",
+				"locale": "es",
+				"status": "published",
+				"data": {
+					"title": "Taxco",
+					"description": "La ciudad de la plata en las montañas de Guerrero, con sus casas blancas y la iglesia de Santa Prisca.",
+					"cover": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050353.JPG",
+							"alt": "Santa Prisca über der Stadt Taxco",
+							"filename": "p1050353.jpg"
+						}
+					},
+					"photos": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050352.JPG",
+									"alt": "Taxco: Foto",
+									"filename": "p1050352.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050381.JPG",
+									"alt": "Taxco: Foto",
+									"filename": "p1050381.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050386.JPG",
+									"alt": "Taxco: Foto",
+									"filename": "p1050386.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050358.JPG",
+									"alt": "Taxco: Foto",
+									"filename": "p1050358.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050394.JPG",
+									"alt": "Taxco: Foto",
+									"filename": "p1050394.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050345.JPG",
+									"alt": "Taxco: Foto",
+									"filename": "p1050345.jpg"
+								}
+							}
+						}
+					],
+					"sort_order": 4
+				},
+				"translationOf": "gal-taxco-de"
+			},
+			{
+				"id": "gal-chiapas-de",
+				"slug": "chiapas",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Chiapas",
+					"description": "San Cristóbal de las Casas, der Cañón del Sumidero und die Wasserfälle von Agua Azul.",
+					"cover": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050497.JPG",
+							"alt": "Kathedrale von San Cristóbal de las Casas",
+							"filename": "p1050497.jpg"
+						}
+					},
+					"photos": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050566.JPG",
+									"alt": "Cañón del Sumidero",
+									"filename": "p1050566.jpg"
+								}
+							},
+							"caption": "Cañón del Sumidero"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050683.JPG",
+									"alt": "Wasserfälle von Agua Azul",
+									"filename": "p1050683.jpg"
+								}
+							},
+							"caption": "Wasserfälle von Agua Azul"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050505.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050505.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050511.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050511.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050485.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050485.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050491.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050491.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050493.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050493.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050534.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050534.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050629.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050629.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050691.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050691.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050717.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050717.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/imgp0207.jpg",
+									"alt": "Chiapas: Foto",
+									"filename": "imgp0207.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/imgp0212.jpg",
+									"alt": "Chiapas: Foto",
+									"filename": "imgp0212.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040329.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1040329.jpg"
+								}
+							}
+						}
+					],
+					"sort_order": 5
+				}
+			},
+			{
+				"id": "gal-chiapas-en",
+				"slug": "chiapas",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Chiapas",
+					"description": "San Cristóbal de las Casas, the Sumidero Canyon and the Agua Azul waterfalls.",
+					"cover": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050497.JPG",
+							"alt": "Kathedrale von San Cristóbal de las Casas",
+							"filename": "p1050497.jpg"
+						}
+					},
+					"photos": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050566.JPG",
+									"alt": "Cañón del Sumidero",
+									"filename": "p1050566.jpg"
+								}
+							},
+							"caption": "Sumidero Canyon"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050683.JPG",
+									"alt": "Wasserfälle von Agua Azul",
+									"filename": "p1050683.jpg"
+								}
+							},
+							"caption": "Agua Azul waterfalls"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050505.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050505.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050511.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050511.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050485.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050485.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050491.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050491.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050493.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050493.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050534.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050534.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050629.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050629.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050691.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050691.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050717.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050717.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/imgp0207.jpg",
+									"alt": "Chiapas: Foto",
+									"filename": "imgp0207.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/imgp0212.jpg",
+									"alt": "Chiapas: Foto",
+									"filename": "imgp0212.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040329.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1040329.jpg"
+								}
+							}
+						}
+					],
+					"sort_order": 5
+				},
+				"translationOf": "gal-chiapas-de"
+			},
+			{
+				"id": "gal-chiapas-es",
+				"slug": "chiapas",
+				"locale": "es",
+				"status": "published",
+				"data": {
+					"title": "Chiapas",
+					"description": "San Cristóbal de las Casas, el Cañón del Sumidero y las cascadas de Agua Azul.",
+					"cover": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050497.JPG",
+							"alt": "Kathedrale von San Cristóbal de las Casas",
+							"filename": "p1050497.jpg"
+						}
+					},
+					"photos": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050566.JPG",
+									"alt": "Cañón del Sumidero",
+									"filename": "p1050566.jpg"
+								}
+							},
+							"caption": "Cañón del Sumidero"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050683.JPG",
+									"alt": "Wasserfälle von Agua Azul",
+									"filename": "p1050683.jpg"
+								}
+							},
+							"caption": "Cascadas de Agua Azul"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050505.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050505.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050511.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050511.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050485.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050485.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050491.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050491.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050493.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050493.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050534.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050534.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050629.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050629.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050691.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050691.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050717.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1050717.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/imgp0207.jpg",
+									"alt": "Chiapas: Foto",
+									"filename": "imgp0207.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/imgp0212.jpg",
+									"alt": "Chiapas: Foto",
+									"filename": "imgp0212.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040329.JPG",
+									"alt": "Chiapas: Foto",
+									"filename": "p1040329.jpg"
+								}
+							}
+						}
+					],
+					"sort_order": 5
+				},
+				"translationOf": "gal-chiapas-de"
+			},
+			{
+				"id": "gal-unterwegs-de",
+				"slug": "unterwegs",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Unterwegs",
+					"description": "Augenblicke zwischen den Zielen: Vulkane, Strände, Städte bei Nacht und Mariachis.",
+					"cover": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050446.JPG",
+							"alt": "Schneebedeckter Vulkan",
+							"filename": "p1050446.jpg"
+						}
+					},
+					"photos": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050427.JPG",
+									"alt": "Puebla bei Nacht",
+									"filename": "p1050427.jpg"
+								}
+							},
+							"caption": "Puebla bei Nacht"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050470.JPG",
+									"alt": "Palapas am Strand",
+									"filename": "p1050470.jpg"
+								}
+							},
+							"caption": "Palapas am Strand"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040568.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040568.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050397.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1050397.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050432.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1050432.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050466.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1050466.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050471.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1050471.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040566.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040566.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040549.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040549.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040560.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040560.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040576.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040576.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040519.JPG",
+									"alt": "Mariachis",
+									"filename": "p1040519.jpg"
+								}
+							},
+							"caption": "Mariachis"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040365.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040365.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040387.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040387.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040390.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040390.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040397.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040397.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040407.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040407.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040383.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040383.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040384.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040384.jpg"
+								}
+							}
+						}
+					],
+					"sort_order": 6
+				}
+			},
+			{
+				"id": "gal-unterwegs-en",
+				"slug": "on-the-road",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "On the road",
+					"description": "Moments between destinations: volcanoes, beaches, towns at night and mariachis.",
+					"cover": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050446.JPG",
+							"alt": "Schneebedeckter Vulkan",
+							"filename": "p1050446.jpg"
+						}
+					},
+					"photos": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050427.JPG",
+									"alt": "Puebla bei Nacht",
+									"filename": "p1050427.jpg"
+								}
+							},
+							"caption": "Puebla at night"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050470.JPG",
+									"alt": "Palapas am Strand",
+									"filename": "p1050470.jpg"
+								}
+							},
+							"caption": "Palapas on the beach"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040568.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040568.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050397.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1050397.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050432.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1050432.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050466.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1050466.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050471.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1050471.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040566.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040566.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040549.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040549.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040560.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040560.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040576.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040576.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040519.JPG",
+									"alt": "Mariachis",
+									"filename": "p1040519.jpg"
+								}
+							},
+							"caption": "Mariachis"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040365.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040365.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040387.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040387.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040390.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040390.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040397.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040397.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040407.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040407.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040383.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040383.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040384.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040384.jpg"
+								}
+							}
+						}
+					],
+					"sort_order": 6
+				},
+				"translationOf": "gal-unterwegs-de"
+			},
+			{
+				"id": "gal-unterwegs-es",
+				"slug": "de-camino",
+				"locale": "es",
+				"status": "published",
+				"data": {
+					"title": "De camino",
+					"description": "Momentos entre destinos: volcanes, playas, ciudades de noche y mariachis.",
+					"cover": {
+						"$media": {
+							"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050446.JPG",
+							"alt": "Schneebedeckter Vulkan",
+							"filename": "p1050446.jpg"
+						}
+					},
+					"photos": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050427.JPG",
+									"alt": "Puebla bei Nacht",
+									"filename": "p1050427.jpg"
+								}
+							},
+							"caption": "Puebla de noche"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050470.JPG",
+									"alt": "Palapas am Strand",
+									"filename": "p1050470.jpg"
+								}
+							},
+							"caption": "Palapas en la playa"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040568.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040568.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050397.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1050397.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050432.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1050432.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050466.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1050466.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1050471.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1050471.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040566.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040566.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040549.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040549.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040560.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040560.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040576.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040576.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040519.JPG",
+									"alt": "Mariachis",
+									"filename": "p1040519.jpg"
+								}
+							},
+							"caption": "Mariachis"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040365.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040365.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040387.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040387.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040390.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040390.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040397.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040397.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040407.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040407.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040383.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040383.jpg"
+								}
+							}
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://mexiko-reisefuehrer.com/images/gallery/P1040384.JPG",
+									"alt": "Unterwegs: Foto",
+									"filename": "p1040384.jpg"
+								}
+							}
+						}
+					],
+					"sort_order": 6
+				},
+				"translationOf": "gal-unterwegs-de"
+			}
+		],
+		"pages": [
+			{
+				"id": "page-about-de",
+				"slug": "ueber-mich",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Über mich",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k3",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1",
+									"text": "Mein Name ist "
+								},
+								{
+									"_type": "span",
+									"_key": "k0",
+									"text": "Juan José Garcia Arcos",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2",
+									"text": ". Ich bin Mexikaner, habe in Mexiko, Santo Domingo und Hamburg studiert und zwischen 1995 und 2005 in Deutschland Spanisch unterrichtet."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4",
+									"text": "Seit Dezember 2005 besitze ich eine gültige Reiseleiterlizenz. Ich bin bei der Tourismus- und Handelskammer von Mexiko-Stadt registriert und habe an der Nationalen Schule für Anthropologie und Geschichte studiert. Zur Zeit absolviere ich ein Seminar über die Schriften der Maya."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "page-about-en",
+				"slug": "ueber-mich",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "About me",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k9",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7",
+									"text": "My name is "
+								},
+								{
+									"_type": "span",
+									"_key": "k6",
+									"text": "Juan José Garcia Arcos",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k8",
+									"text": ". I am Mexican, studied in Mexico, Santo Domingo and Hamburg, and taught Spanish in Germany between 1995 and 2005."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k11",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k10",
+									"text": "I have held an official tour guide licence since December 2005. I am registered with the Chamber of Tourism and Commerce of Mexico City and studied at the National School of Anthropology and History. I am currently taking a seminar on the Maya scripts."
+								}
+							]
+						}
+					]
+				},
+				"translationOf": "page-about-de"
+			},
+			{
+				"id": "page-about-es",
+				"slug": "ueber-mich",
+				"locale": "es",
+				"status": "published",
+				"data": {
+					"title": "Sobre mí",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k15",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k13",
+									"text": "Me llamo "
+								},
+								{
+									"_type": "span",
+									"_key": "k12",
+									"text": "Juan José Garcia Arcos",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k14",
+									"text": ". Soy mexicano, estudié en México, Santo Domingo y Hamburgo, y entre 1995 y 2005 di clases de español en Alemania."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k17",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k16",
+									"text": "Desde diciembre de 2005 cuento con licencia oficial de guía de turistas. Estoy registrado en la Cámara de Turismo y Comercio de la Ciudad de México y estudié en la Escuela Nacional de Antropología e Historia. Actualmente curso un seminario sobre las escrituras mayas."
+								}
+							]
+						}
+					]
+				},
+				"translationOf": "page-about-de"
+			},
+			{
+				"id": "page-impressum-de",
+				"slug": "impressum",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Impressum",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k19",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k18",
+									"text": "Angaben gemäß § 5 DDG folgen. Bitte Name, Anschrift, Telefon und E-Mail hier eintragen."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "page-impressum-en",
+				"slug": "impressum",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Legal notice",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k21",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k20",
+									"text": "Legal notice to follow."
+								}
+							]
+						}
+					]
+				},
+				"translationOf": "page-impressum-de"
+			},
+			{
+				"id": "page-impressum-es",
+				"slug": "impressum",
+				"locale": "es",
+				"status": "published",
+				"data": {
+					"title": "Aviso legal",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k23",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k22",
+									"text": "Aviso legal pendiente."
+								}
+							]
+						}
+					]
+				},
+				"translationOf": "page-impressum-de"
+			},
+			{
+				"id": "page-datenschutz-de",
+				"slug": "datenschutz",
+				"locale": "de",
+				"status": "published",
+				"data": {
+					"title": "Datenschutzerklärung",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k25",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k24",
+									"text": "Die Datenschutzerklärung folgt. Bitte hier eintragen, bevor die Seite veröffentlicht wird."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "page-datenschutz-en",
+				"slug": "datenschutz",
+				"locale": "en",
+				"status": "published",
+				"data": {
+					"title": "Privacy policy",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k27",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k26",
+									"text": "Privacy policy to follow."
+								}
+							]
+						}
+					]
+				},
+				"translationOf": "page-datenschutz-de"
+			},
+			{
+				"id": "page-datenschutz-es",
+				"slug": "datenschutz",
+				"locale": "es",
+				"status": "published",
+				"data": {
+					"title": "Aviso de privacidad",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k29",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k28",
+									"text": "Aviso de privacidad pendiente."
+								}
+							]
+						}
+					]
+				},
+				"translationOf": "page-datenschutz-de"
+			}
+		],
+		"posts": [
+			{
+				"id": "post-welcome",
+				"slug": "willkommen",
+				"locale": "de",
+				"status": "draft",
+				"data": {
+					"title": "Willkommen im Reiseblog",
+					"excerpt": "Ein Beispielbeitrag. Bearbeiten oder löschen Sie ihn im Admin.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k67",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k66",
+									"text": "Dies ist ein Entwurf. Hier entstehen künftig Reiseberichte und Tipps rund um Mexiko."
+								}
+							]
+						}
+					]
+				},
+				"bylines": [
+					{
+						"byline": "byline-juan"
+					}
+				]
+			}
+		],
+		"testimonials": []
+	}
+}
